@@ -8,22 +8,22 @@ canvas:
 yellowdig_url: 'https://canvas.asu.edu/courses/101007/assignments/2613245'
 
 yellowdig: 
-  post-01: 'Friday, March 12'
-  post-02: 'Friday, March 19'
-  post-03: 'Friday, March 26'
-  post-04: 'Friday, April 2' 
-  post-05: 'Friday, April 9' 
-  post-06: 'Friday, April 16' 
-  post-07: 'Friday, April 23' 
+  post-01: 'Sunday, October 17'
+  post-02: 'Sunday, October 24'
+  post-03: 'Sunday, October 31'
+  post-04: 'Sunday, November 7' 
+  post-05: 'Sunday, November 14' 
+  post-06: 'Sunday, November 21' 
+  post-07: 'Sunday, November 28' 
   
 
 labs:
-  lab-01:  'Tuesday, March 16'
-  lab-02:  'Tuesday, March 23'
-  lab-03:  'Friday, March 30'
-  lab-04:  'Tuesday, April 6'
-  lab-05:  'Tuesday, April 13'
-  lab-06:  'Tuesday, April 20'
+  lab-01:  'Tuesday, October 19'
+  lab-02:  'Tuesday, October 26'
+  lab-03:  'Tuesday, November 2'
+  lab-04:  'Tuesday, November 9'
+  lab-05:  'Tuesday, November 16'
+  lab-06:  'Tuesday, November 23'
   
 videos: 
   vid-01: 'https://www.youtube.com/embed/uQxRUoqnRtc'
@@ -35,7 +35,7 @@ videos:
 
 
 projects: 
-  website: 'Friday, April 23'
+  website: 'Friday, December 3'
   
   
 ---
