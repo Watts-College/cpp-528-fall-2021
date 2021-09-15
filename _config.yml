@@ -43,9 +43,9 @@ header:
 - title: Resources
   url: resources/
 - title: Yellowdig
-  url: https://canvas.asu.edu/courses/82561/assignments/2072813
+  url: https://canvas.asu.edu/courses/100994/assignments/2612982
 - title: Canvas
-  url: https://canvas.asu.edu/courses/82561
+  url: https://canvas.asu.edu/courses/100994
 - title: Get Help
   url: help/
 
@@ -54,15 +54,15 @@ header:
 # GITHUB CONFIGURATIONS 
 
 url :               "https://watts-college.github.io"
-baseurl:            "/cpp-528-template" # update this
-course_url:         "http://watts-college.github.io/cpp-528-template/" # update this
+baseurl:            "/cpp-528-fall-2021" # update this
+course_url:         "https://watts-college.github.io/cpp-528-fall-2021/" # update this
 title:              Watts-College # don't change this
 
 github_info:
     username:          watts-college # Github location of the course
     branch:            main
-    website-repo:      cpp-528-template # update this
-    course-repo:       cpp-528-template # update this
+    website-repo:      cpp-528-fall-2021 # update this
+    course-repo:       cpp-528-fall-2021 # update this
 
 
 
