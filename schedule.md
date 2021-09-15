@@ -5,7 +5,7 @@ title: Schedule
 canvas: 
   assignment_url: 'https://canvas.asu.edu/courses/101007/assignments'
   
-yellowdig_url: 'https://canvas.asu.edu/courses/82561/assignments/2613243'
+yellowdig_url: 'https://canvas.asu.edu/courses/101007/assignments/2613245'
 
 yellowdig: 
   post-01: 'Friday, March 12'
