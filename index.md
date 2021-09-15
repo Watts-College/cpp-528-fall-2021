@@ -13,7 +13,7 @@ info:
  course_title: Foundations of Data Science Part III
  course_number: CPP 528 
  course_level: Graduate 
- course_website: 'https://canvas.asu.edu/courses/100994'
+ course_website: 'https://canvas.asu.edu/courses/101007'
  course_start_end_dates: March 8 to April 23, 2021
  course_prerequisites:  
  class_meets_when:  Asynchronous  
