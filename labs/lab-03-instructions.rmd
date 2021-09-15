@@ -1,0 +1,161 @@
+---
+title: 'Lab 03 - Descriptive Analysis'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output:
+  rmdformats::downcute:
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: false
+    highlight: tango
+    df_print: paged
+    includes:
+      after_body: 'footer.html'
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=F, warning=F, eval=T)
+library( dplyr )
+library( pander )
+```
+
+
+<br>
+
+
+---
+
+<br>
+
+
+
+Inferential analysis is never a completely linear process. It involves many iterations of cleaning data, describing data, visualizing data, and modeling data until you are confident about the process and the results. 
+
+**Example diagram of the iterative loops in the process of data analysis:**
+
+![](images/flow_chart_data_project.png){width="150%"}
+
+The first steps in this process - simply describing your data accurately and thoroughly, and showing some of the core features of the data through visualization. 
+
+I personally never trust a regression model until I know a lot about the data that is going into the model. Outliers, skewed distribtuions, and non-linear relationships can wreak havoc on inferential models. So until I feel comfortable that it is correlations and not specification driving the results in the model I will keep exploring the data and testing various assumptions about key relationships in the data. 
+
+Describing the dependent variable is especially important because it is necessary to understand what you are trying to explain. In this case after doing some analysis presented in the tutorial I noted that the lower range of growth of Median Home Values is -100% (which makes sense since it would be hard to lose more than 100% of your value), and the upper tail tapers off around 200%, although there are a handful of tracts that have growth rates above 500%, which seems unrealistic and likely not meaningful. I also noted that the mean is larger than the median by a significant margin (almost 10 percentage points) and the data is skewed right. This should alert you that outliers might be a problem, and some transformation of the dependent variable might be advisable. 
+
+More importantly, describing and visualizing data helps catch problems that occurred during the data cleaning and data wrangling steps. The descriptives help you identify any odd values in the data that seem unrealistic or relationships that seem off. If you are surprised by something you see in the data it is always a good idea to check the data steps to make sure error was not introduced through the code. 
+
+This lab asks you to explore your new longitudinal census dataset to become better acquanted with the outcomes in the study. 
+
+
+# Instructions 
+
+## Part 01 - Change in Home Values
+
+Start by reading the introduction the a recent paper published by Baum-Snow and Hartley: 
+
+**Accounting for Central Neighborhood Change, 1980-2010** [ [PDF](https://github.com/DS4PS/cpp-528-spr-2020/raw/master/articles/home-value-change/economic-model-central-city-neighborhoods-white-flight-white-return.pdf) ] 
+
+> "Neighborhoods within 2 km of most central business districts of U.S. metropolitan areas experienced population declines from 1980 to 2000 but have rebounded markedly since 2000 at greater pace than would be expected from simple mean reversion. Statistical decompositions reveal that 1980-2000 departures of residents without a college degree (of all races) generated most of the declines while the return of college educated whites and the stabilization of neighborhood choices by less educated whites promoted most of the post-2000 rebound. The rise of childless households and the increase in the share of the population with a college degree, con- ditional on race, also promoted 1980-2010 increases in central area population and educational composition of residents, respectively. Estimation of a neighborhood choice model shows that changes in choices to live in central neighborhoods primarily reflect a shifting balance between rising home prices and valuations of local amenities, though 1980-2000 central area population declines also reflect deteriorating nearby labor market opportunities for low skilled whites."
+
+It was somewhat surprising to see such high growth rates of home value in the US data from 2000 to 2010 (25% to 35% on average), especially considering we have adjusted for inflation and that is immediately following the housing crisis. 
+
+For Part 01 of the lab, reproduce the descriptive analysis demonstrated in the tutorial but do it for periods 1990 to 2000 instead of the 2000 to 2010 period used in the tutorial. **Note that we are only using urban tracts** rather than all urban and rural tracts. 
+
+How do changes in home value differ between the 1990-2000 period and 2000-2010? 
+
+*If you have time*, what do the authors suggest would predict fall in central city home values between 1990 and 2000? 
+
+## Part 02 - Measuring Gentrification
+
+You were asked to come up with a way to conceptualize gentrification. 
+
+This week you will create a new variable in your dataset that allows you to operationalize gentrification and examine its prevelance in the data. How many census tracts are candidates (start out at a low income level with high diversity)? And of those how many have transitioned into advanced stages of gentrification?
+
+Provide an explanation and justification of the way you measure gentrification in the data. 
+
+Check out the Urban Displacement Project's [METHODOLOGY](https://www.urbandisplacement.org/sites/default/files/images/udp_methodology_for_ny_-_jan_2019.pdf) for some ideas. 
+
+## Part 03 - Spatial Patterns
+
+Histograms and scatterplots help us understand the statistical properties and relationships between variables in our dataset. Due to the nature of cities, these relationships are all shaped by their location in the city. Geography matters a great deal in urban policy, so it should not be ignored. 
+
+Simple simple choropleth maps can be extremely helpful in understanding relationships in the data. 
+
+Revisit one of the labs from CPP 529 and prepare a Dorling Cartogram shapefile for your project. You can select one or more cities of your choice (you can use the same city if you like). 
+
+[DORLING CARTOGRAM LAB](https://ds4ps.org/cpp-529-master/labs/lab-04-instructions.html)
+
+
+Follow the instructions for saving your cartogram as a GeoJSON file. These files are nice because they can be stored on GitHub and read directly into R. If you create it right the first time you can use it over and over after that. 
+
+Please create the following choropleth maps and report your main findings: 
+
+**Home Values**
+
+* Describe the distribution of home values in 1990 - where are high and low-value tracts located in the city/cities? 
+* Compare values in 2000 to changes in values from 1990-2000. Do the largest gains occur in tracts with above or below-average home prices in 2000? 
+
+**Gentrification**
+
+* create a map that highlights tracts that are candidates for gentrification in 2000 and tracts that gentrify between 1990 and 2000. 
+
+Do you find any meaningful patterns in where gentrification occurs? 
+
+
+-----
+
+
+<br>
+
+# Submission Instructions
+
+When you complete the lab you will submit three individual files:
+
+* your `utilities.R` file
+* your knitted RMD file that answers the questions posed above.
+     + If your RMD file looks exactly like the [tutorial](lab-03-tutorial.html), you will not get full credit.
+     + This is because the tutorial is meant to show you what the data preprocessing steps should look like; not where they should live (which is in a separate `.R` file).
+     + **You need to use `import::here()` function and import specific objects** rather than doing all of your data processing within the `.rmd` file. If you need a tutorial on how to use this, please see the ["Project Data Steps" tutorial](PROJECT-DATA-STEPS.html).
+* your HTML output of your RMD file
+
+Note that this lab will become one chapter in your final report. You will save time by drafting the lab as if it is an external report chapter rather than a regular lab. You may all want to start having subfolders within your `labs/wkXX/` directory so that each person can store their work there without worrying about what they name it (remember to add a README.md file as well).
+
+Login to Canvas at <http://canvas.asu.edu> and navigate to the assignments tab in the course repository. Upload your zipped folder to the appropriate lab submission link.
+
+Remember to:
+
+* name your files according to the convention: **Lab-##-LastName.rmd**
+* show your solution, include your code.
+* do not print excessive output (like a full data set).
+* follow appropriate style guidelines (spaces between arguments, etc.).
+
+See [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml) for examples.
+
+
+---
+
+<br>
+
+## Notes on Knitting
+
+If you are having problems with your RMD file, visit the [**RMD File Styles and Knitting Tips**](https://ds4ps.org/cpp-526-spr-2020/labs/r-markdown-files.html) manual.
+
+Note that when you knit a file, it starts from a blank slate. You might have packages loaded or datasets active on your local machine, so you can run code chunks fine. But when you knit you might get errors that functions cannot be located or datasets don't exist. Be sure that you have included chunks to load these in your RMD file.
+
+Your RMD file will not knit if you have errors in your code. If you get stuck on a question, just add `eval=F` to the code chunk and it will be ignored when you knit your file. That way I can give you credit for attempting the question and provide guidance on fixing the problem.
+
+
+<br>
+<hr>
+<br>
+
+<style>
+blockquote {
+    padding: 11px 22px;
+    margin: 0 0 22px;
+    font-size: 18px;
+    border-left: 5px solid lightgray;
+}
+
+</style>
+

@@ -1,0 +1,390 @@
+---
+title: 'Developing a Reliable Index'
+output:
+  html_document:
+    theme: readable
+    df_print: paged
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set( echo=TRUE, message=F, warning=F, eval=T )
+```
+
+
+# Introduction 
+
+You have been asked to a create a scale or an index that combines several measures into a single measure. 
+
+These sorts of scales can be useful for a variety of purposes. For example:
+
+*Miles, J. N., Weden, M. M., Lavery, D., Escarce, J. J., Cagney, K. A., & Shih, R. A. (2016). Constructing a time-invariant measure of the socio-economic status of US census tracts. Journal of Urban Health, 93(1), 213-232.* [ [pdf](https://github.com/DS4PS/cpp-528-spr-2020/raw/master/articles/community-index/constructing-time-stable-measure-of-socio-economic-status.pdf) ]
+
+> A well-established literature documents that the **socio-economic characteristics of the places in which we live influence our health and wellbeing.** For example, neighborhood socio-economic status (NSES), over and above individual socio-economic status, can have lasting effects on outcomes ranging from hypertension, to allostatic load, disability, and depression. 
+> 
+> Reviews of research on neighborhoods and health have suggested we need to better understand the role of critical periods, sequencing, and the accumulation of (dis)advantages over time. **Longitudinal studies hoping to address these questions, however, must first address the methodological challenge of appropriately measuring neighborhood characteristics over time.**
+
+In other words, we need a measure where a value of 50 means the same thing in both time periods. We need a **reliable** instrument to conduct this type of research.
+
+Measurement theory is an entire branch of statistics, so methods can get quite nuanced and complex. But the basic idea is to combine multiple items into a single index or scale that captures a specific latent construct like health, happiness, personality, or ability. 
+
+This exercise helps you think through how you might combine Census variables to form measures of neighborhood traits that help you better conceptualize the study of neighborhood change. 
+
+
+# Setup
+
+```{r}
+library( dplyr )   # data wrangling
+library( xtable )  # nice tables 
+library( pander )  # nice tables 
+library( psych )   # calculate instrument reliability (alpha)
+library( ggplot2 ) # graphics
+library( tidyr )   # wrangling 
+```
+
+Helper functions to draw insightful correlation tables: 
+
+
+```{r, echo=T}
+
+# helper functions for pairs
+panel.cor <- function(x, y, digits=2, prefix="", cex.cor )
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    # r <- abs(cor(x, y))
+    r <- round( cor(x, y), 2 )
+    txt <- paste( prefix, r, sep="" )
+    # txt <- format(c(r, 0.123456789), digits=digits)[1]
+    # txt <- paste( prefix, txt, sep="" )
+    if(missing(cex.cor)) cex <- 4 # 0.5/strwidth(txt)
+    
+    test <- cor.test(x,y)
+    # borrowed from printCoefmat
+    Signif <- symnum(test$p.value, corr = FALSE, na = FALSE,
+                  cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+                  symbols = c("***", "**", "*", ".", " "))
+    
+    text( 0.5, 0.5, txt, cex = 0.6*cex )
+    text( 0.7, 0.8, Signif, cex=cex, col=2 )
+}
+
+panel.smooth <- function( x, y, col=gray(0.7,0.4), bg=NA, pch=16, 
+                         cex=2, col.smooth="red", span=2/3, iter=3, ...) 
+{
+    points(x, y, pch = pch, col = col, bg = bg, cex = cex)
+    ok <- is.finite(x) & is.finite(y)
+    if (any(ok)) 
+        lines( stats::lowess(x[ok], y[ok], f = span, iter = iter), 
+            col = col.smooth, lwd=2, ...)
+}
+
+panel.cor2 <- function(x, y, digits=2, prefix="" )
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- round( abs( cor(x, y)), 2 )
+    txt <- paste( prefix, r, sep="" )
+    text( 0.5, 0.5, txt, cex = 2 )
+
+}
+
+```
+
+They are used as part of the **pairs()** function to add graphs and correlation coefficients to the table: 
+
+```{r}
+x1 <- rnorm( 100 )
+x2 <- rnorm( 100 )
+x3 <- rnorm( 100 )
+
+d <- data.frame( x1, x2, x3 )
+
+pairs( d, lower.panel=panel.smooth, upper.panel=panel.cor )
+```
+
+<br>
+
+
+---
+
+<br>
+
+
+# Reliability 
+
+Science requires instruments that can be used to measure things. Reliability describes one characteristics of an instrument - the consistency of the measure. 
+
+There are different forms of reliability, but a good way to think about it is the accuracy of a bathroom scale. If the same person steps off the scale and back on five times how much will each measure vary? Is it one-tenth or pound or ten pounds? It will depend on the quality (and likely expense and age) of the scale. 
+
+Similarly, in social science we have better and worst instruments. If we have a reliable instrument like an IQ test it should give us similar answers when administered over and over. If the same person took an IQ test two days in a row how much does it vary? Their IQ will likely not change over that time period (although things like sleep can impact performance). Or if a group of people that all perform very similarly in school take the IQ test would we expect them to score similarly? 
+
+Instruments become less reliable when noise or **random error** is part of the measure. In statistics random error means specifically that the scale must be equally likely to report your weight five pounds heavier than you are in reality as it would be to say you are five pounds lighter. 
+
+Systematic errors where they scale is always five pounds off in the same direction are actually pretty easy to fix. They don't increase the variance of the measure (which leads to Type II errors in regression) and once you know the biased you can just add the correction factor to everyone in the sample. Oddly, even if everyone's weight is off by a large amount, as long as it's the same amount it would not actually biased the slope in the model. 
+
+If several items are highly correlated then creating an index from them can actually help stabilize the instrument and result in something more reliable than using a single instrument. So their value comes from the ability to triangulate a better value on a scale.
+
+For example, if you were evaluating the classroom performance of a teacher there is a chance you could arrive on an especially good day, or an especially bad day, and your evaluation would not be reflective of their actual ability. If you visit their classroom several times and average the scores you probably have a better overall measure of their ability. Similarly, when measuring a latent construct if you can combine several data points that all represent different dimensions of the same underlying construct you will have a more stable total score. 
+
+
+## Calculating Cronbach's Alpha
+
+Cronbach was one of the first to develop and popularize the use of a relability score to evaluate instruments in psychology. The [formula](https://en.wikipedia.org/wiki/Cronbach%27s_alpha) is a little hairy, but the intuition is straight-forward. 
+
+You have three variables that you will use to create a scale. Some of the variance for each variable captures the construct of interest, and some of the variance does not. 
+
+X1 = a1 + e1  
+X2 = a2 + e2  
+X3 = a3 + e3  
+
+When you combine the three variables X1 to X3 into a common scale you will have a component that represents a stable measure of the construct: **A = ( a1 + a2 + a3 ) / 3**
+
+And you will have a component of the three variables that represents random measurement error:  **B = ( e1 + e2 + e3 ) / 3**
+
+The ratio of these components - the signal to noise ratio A/(A+B) - drives the reliability measure. This is a grossly over-simplified explanation, but gives you some context for what **alpha** is reporting. 
+
+We can calculate the alpha easily enough with the **psych** package in R. Let's use data from the built-in **state** dataset to demonstrate. After loading the state database we can access a table called **state.x77** which reports statistics from all 50 states from 1977:
+
+```{r}
+data( state )
+head( state.x77 ) %>% pander()
+```
+
+If we wanted to construct a measure for something that approximates **quality of life** in each state, we can select a subset of these and combine them into a single instrument. Let's use life expectancy, the murder rate, and high school graduation rates. 
+
+```{r}
+stats <- as.data.frame( state.x77 )
+names( stats )
+
+df <- dplyr::select( stats, 'Life Exp', 'Murder', 'HS Grad' )
+pairs( df, lower.panel=panel.smooth, upper.panel=panel.cor )
+```
+
+
+Now calculate the alpha if these three variables are combined into an index: 
+
+```{r}
+# cronbach's alpha calc
+# library( psych )
+a1 <- psych::alpha( df, check.keys=TRUE )$total$raw_alpha
+a1
+```
+
+
+
+Note that the alpha measure is derived from the correlation of the three variables. If we add another variable with a lower correlation it lowers the score: 
+
+```{r}
+df <- dplyr::select( stats, 'Life Exp', 'Murder', 'HS Grad', 'Frost' )
+pairs( df, lower.panel=panel.smooth, upper.panel=panel.cor )
+```
+
+Oddly the number of days below freezing in each state is highly correlated with murder rates! But it has a poor overall relationship with others. Thus we have reduced the reliability of our index. 
+
+```{r}
+psych::alpha( df, check.keys=TRUE )$total$raw_alpha
+```
+
+
+NOTE, some might argue that temperature contributes a great deal to the quality of life in a state! Some there are theoretical reasons to include it. But recall that the trick in creating instruments is to define your latent construct as precisely as possible. Life expectancy, murder rates, and education outcomes say something about the quality of institutions or the level of civility in a state, which is likely distinct from other geographic constructs that could form a separate quality of life index. 
+
+We can improve our reliability slightly if we replace graduation rates with illiteracy: 
+
+```{r}
+df <- dplyr::select( stats, 'Life Exp', 'Murder', 'Illiteracy' )
+pairs( df, lower.panel=panel.smooth, upper.panel=panel.cor )
+psych::alpha( df, check.keys=TRUE )$total$raw_alpha
+```
+
+We are now above the threshold of 0.60 used for a minimally reliable index. 
+
+
+## Combining Items
+
+We have determined that life expectancy, murder rates, and literacy rates all partially measure the same construct. We achieve a reliability score of 0.64.
+
+How do we combine these items, though? Notice the different scales: 
+
+```{r}
+summary( df ) %>% pander()
+```
+
+If we simply add them together the measures with a greater range and variance will contribute more toward the final index score than variables with a lower range and variance. We need to do something to standardize the inputs so they are contributing similar amounts. 
+
+*If you are interested in better approaches to this problems check out work on factor analysis and instrument design.*
+
+
+Before and after standardizing: 
+
+```{r, echo=F, fig.height=3, fig.width=8}
+ggplot( gather( df, cols, value), aes(x = value)) + 
+        geom_histogram( binwidth = 5 ) + facet_grid(.~cols)
+
+df2 <- scale( df ) %>% as.data.frame()
+ggplot( gather( df2, cols, value), aes(x = value)) + 
+        geom_histogram( binwidth = 1 ) + facet_grid(.~cols)
+```
+
+
+## Rescaling Data
+
+One approach is to convert all current variables to new scales ranging from 0 to 100. 
+
+This is sometimes called **normalizing** a variable, but that term is used inconsistently across disciplines so it is better to be explicit and say you are rescaling a variable to a new scale of A (min value) to B (max value).
+
+The formula is: 
+
+Y = (new.max) * (x - x.min) / (x.max-x.min)
+
+```{r}
+x <- df$Murder
+x.min <- min(x)
+x.max <- max(x)
+
+# convert to ratio in 0 to 1 scale
+p <- ( x - x.min ) / ( x.max - x.min )
+
+# convert to 0 to 100 scale
+x.rescaled <- p * 100
+  
+summary( x.rescaled )
+```
+
+Or more conveniently: 
+
+```{r}
+library( scales )
+rescale( x, to = c(0,100) )  %>% summary()
+```
+
+Let's combine our items after rescaling: 
+
+```{r}
+# flip murder en illiteracy so more is better
+x1 <- df$`Life Exp`
+x2 <- - df$Murder
+x3 <- - df$Illiteracy
+
+x1 <- rescale( x1, to = c(0,100) )
+x2 <- rescale( x2, to = c(0,100) )
+x3 <- rescale( x3, to = c(0,100) )
+
+y = x1 + x2 + x3 
+summary( y )
+
+df2 <- df
+df2$qual.of.life <- y
+pairs( df2, lower.panel=panel.smooth, upper.panel=panel.cor )
+```
+
+We can see that all inputs are on a scale of 0 to 100, and the overall quality of life index now ranges from a min of 28 to a max of 277 on a scale of 0 to 300. 
+
+
+
+## Standardizing Data
+
+
+Alternatively, we can convert each item into a standardized variable called a Z score. After standardization each variable will have a mean of zero and a standard deviation of 1:
+
+
+```{r}
+df3 <- scale( df ) %>% as.data.frame()
+summary( df3 ) %>% pander()
+```
+
+
+And we can similarly combine these into an index: 
+
+```{r}
+df3 <- scale( df ) %>% as.data.frame()
+
+# make sure all items point in the same direction
+x1 <-   df3$`Life Exp`
+x2 <- - df3$Murder
+x3 <- - df3$Illiteracy
+
+
+y = x1 + x2 + x3 
+summary( y )
+
+df3$qual.of.life <- y
+pairs( df3, lower.panel=panel.smooth, upper.panel=panel.cor )
+```
+
+Notably, rescaling or standardizing variables does not change the underlying correlation structure. So we are not impacting the reliability metrics by rescaling: 
+
+
+```{r}
+pairs( df, lower.panel=panel.smooth, upper.panel=panel.cor )
+pairs( df2, lower.panel=panel.smooth, upper.panel=panel.cor )
+```
+
+
+## Impact of Outliers
+
+Just like regression, outliers can heavily skew a scale. 
+
+```{r}
+x <- df$`Life Exp`   # range of 67 to 73
+x.scaled <- scales::rescale( x, to=c(0,100) )
+hist( x.scaled, col="gray30", breaks=50, border="white", xlim=c(0,100) )
+
+# add an outlier
+
+x <- c( x, 150 )
+x.scaled <- scales::rescale( x, to=c(0,100) )
+hist( x.scaled, col="gray30", breaks=50, border="white", xlim=c(0,100) )
+```
+
+You might check for some extreme outliers and consider truncating values if they are compressing most of your data into a small range. Or do a log transformation before rescaling. 
+
+```{r}
+par( mfrow=c(2,2) )
+hist( x1, col="gray30", border="white", xlim=c(-3.5,3.5) )
+hist( x2, col="gray30", border="white", xlim=c(-3.5,3.5) )
+hist( x3, col="gray30", border="white", xlim=c(-3.5,3.5) )
+hist( y, col="gray30", border="white" )
+```
+
+
+
+You can top-code outliers to see if it has a big impact, but be sure to note ways you change the original data in your data manifest and include tables showing results with and without truncation if you are altering valid data points to minimize the influence of outliers. If the data is an entry error it is sufficient to note the fix. 
+
+```{r}
+# top-coding outliers
+# any values above 75 recoded as 75
+
+x[ x > 75 ] <- 75
+x.scaled <- scales::rescale( x, to=c(0,100) )
+hist( x.scaled, col="gray30", breaks=50, border="white", xlim=c(0,100) )
+```
+
+
+
+
+
+
+
+
+-----
+
+
+
+<br>
+<br>
+
+
+
+
+
+<style>
+blockquote {
+    padding: 11px 22px;
+    margin: 0 0 22px;
+    font-size: 18px;
+    border-left: 5px solid lightgray;
+}
+
+</style>
+

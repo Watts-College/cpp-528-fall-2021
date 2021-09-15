@@ -1,0 +1,552 @@
+---
+title: "Measurement Exercise"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+runtime: shiny
+---
+
+```{r, eval=F, echo=F}
+#     social: menu
+#     source_code: https://git.io/vaZdx
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set( echo=FALSE, warning=F, message=F )
+
+library( flexdashboard )
+library( dplyr )
+library( psych )
+library( xtable )
+
+# cb <- read.csv( "longitudinal-tract-data-base-codebook.csv", stringsAsFactors=F )
+# cb <- filter( cb, Keep == "X" )
+# vars <- cb$Variable.Name
+# var.labels <- cb$Variable.Label
+# # dat <- read.csv( "LTDB_Std_2010_Sample.csv", stringsAsFactors=F ) 
+# dat <- readRDS( "sample-census-1000.rds" )
+# # d2 <- dat[ , names(dat) %in% cb$Variable.Name ]
+
+dat <- readRDS( "census-sample-1000.rds" )
+
+# put variables onto the same scale
+dat <- 
+  dat %>%
+  mutate( mrent12 = 100*(mrent12/max(mrent12)),
+          mhmval12 = 100*(mhmval12/max(mhmval12)),
+          hinc12 = 100*(hinc12/max(hinc12)),
+          incpc12 = 100*(incpc12/max(incpc12)),
+        )
+
+vars <- names(dat)
+var.labels <- 
+  c("Percent white, non-Hispanic", "Percent black, non-Hispanic", 
+"Percent Hispanic", "Percent Native American race", "Percent foreign born", 
+"Percent speaking other language at home, age 5 plus", "Percent with high school degree or less", 
+"Percent with 4-year college degree or more", "Percent unemployed", 
+"Percent female labor force participation", "Percent professional employees", 
+"Percent manufacturing employees", "Percent veteran", "Percent self-employed", 
+"Median HH income, total", "Per capita income", "Percent in poverty, total", 
+"Percent owner-occupied units", "Percent vacant units", "Percent multi-family units", 
+"Median rent", "Median home value", "Percent structures more than 30 years old", 
+"Percent HH in neighborhood 10 years or less", "Percent 17 and under, total", 
+"Percent 60 and older, total", "Percent 75 and older, total", 
+"Percent currently married, not separated", "Percent widowed, divorced and separated", 
+"Percent female-headed families with children")
+
+var.df <- data.frame( LABEL=vars, VARIABLE=var.labels )
+```
+
+
+
+```{r, echo=F}
+# helper functions for pairs
+panel.cor <- function(x, y, digits=2, prefix="", cex.cor )
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    # r <- abs(cor(x, y))
+    r <- round( cor(x, y), 2 )
+    txt <- paste( prefix, r, sep="" )
+    # txt <- format(c(r, 0.123456789), digits=digits)[1]
+    # txt <- paste( prefix, txt, sep="" )
+    if(missing(cex.cor)) cex <- 4 # 0.5/strwidth(txt)
+    
+    test <- cor.test(x,y)
+    # borrowed from printCoefmat
+    Signif <- symnum(test$p.value, corr = FALSE, na = FALSE,
+                  cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+                  symbols = c("***", "**", "*", ".", " "))
+    
+    text( 0.5, 0.5, txt, cex = 0.6*cex )
+    text( 0.7, 0.8, Signif, cex=cex, col=2 )
+}
+
+panel.smooth <- function( x, y, col=gray(0.7,0.4), bg=NA, pch=16, 
+                         cex=2, col.smooth="red", span=2/3, iter=3, ...) 
+{
+    points(x, y, pch = pch, col = col, bg = bg, cex = cex)
+    ok <- is.finite(x) & is.finite(y)
+    if (any(ok)) 
+        lines( stats::lowess(x[ok], y[ok], f = span, iter = iter), 
+            col = col.smooth, lwd=2, ...)
+}
+
+panel.cor2 <- function(x, y, digits=2, prefix="" )
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- round( abs( cor(x, y)), 2 )
+    txt <- paste( prefix, r, sep="" )
+    text( 0.5, 0.5, txt, cex = 2 )
+
+}
+```
+
+
+
+
+
+WARMUP
+=======================================================================
+
+
+
+Row
+-----------------------------------------------------------------------
+
+
+
+### INDEX DESIGN {data-width=700}
+
+
+This example demonstrates the steps that one might follow to create a new index. 
+
+The exercise is designed to build insight into how we might engineer a robust new data collection process using important data reliability considerations, or how we might leverage large amounts of existing data to create meaningful measures that can be used in our work.
+
+***
+
+**Narcissistic Personality Disfunction**
+
+Recent events in the news have made us wonder if Narcissistic Personality Disfunction (NPD) might be on the rise. This is a personality type characterized by:
+
+* Entitlement 
+* Disregard for others 
+* Self-destructive behaviors 
+* Closed-mindedness 
+* Strong group cohesion 
+
+How can we measure the prevelance of a specific personality type? Just like IQ, health, grit, and happiness - personality is a **latent construct**, a concept that we believe exists and has an impact on the world (those that score higher on IQ tests tend to perform better at analytical tasks). In other words, if someone scores high on a latent construct scale, we should be able to predict their performance or behavior in a specific context. Your [Harry Potter Hogwarts House](https://www.pottermore.com/news/discover-your-hogwarts-house-on-pottermore) is a construct that can be measured, but it is not **valid** because it doesn't predict anything about your behavior (unless you are House Slytherin). 
+
+To develop an accurate scale to measure NPD we need to create a **reliable survey instrument**. An instrument is a collection of items that are combined to create an index or scale that measures your construct. 
+
+*NOTE: Narcissistic Personality Disfunction (NPD) is a made-up disorder for this exercise.*
+
+*** 
+
+**Survey Items**
+
+A reliable instrument consists of **survey items** (individual questions) that all measure the same latent construct. If they are appropriate questions to include in the survey instrument, responses to each question **should be highly-correlated**.
+
+We cannot directly ask a person their NPD score (that would be like asking someone for their IQ without testing for it), so we need to identify behaviors that portray NPD. Our researchers have devised the following questions:
+
+* Q1: Do you enjoy beer pong?
+* Q2: Do you wear salmon-colored shorts? 
+* Q3: Do you think beards are cool? 
+* Q4: Do you enjoy Family Guy? 
+* Q5: Do you like music by Prince?
+* Q6: Would you ever attend a Santacon festival? 
+     
+We have collected test survey data with the proposed items in order to validate the reliability the instrument. You will examine how highly the items correlate, and drop items that have a low correlation in order to create an instrument (measure of NPD) with high reliability. 
+
+***
+
+**Likert Scales**
+
+We can use Likert Scales to make surveys easier. They measure views on a scale that moves from one view to another.
+
+1. I hate it 
+2. I don't like it
+3. I'm indifferent 
+4. I like it 
+5. I love it 
+
+If we create a scale from three of the survey items we can then sum the responses, or average the responses, in order to aggregate the items. 
+
+
+
+
+### NARCISSISTIC PERSONALITY DISFUNCTION {data-width=300}
+
+
+Martin Shkreli became the poster child for Narcissistic Personality Disfunction when his company obtained the manufacturing license for the antiparasitic drug Daraprim and raised the price from $13 to $750 per pill, putting lives at risk in order to net millions in profits. 
+
+
+```{r, fig.width=2}
+knitr::include_graphics("images/shkreli.png")
+```
+
+
+
+
+
+
+
+
+
+
+Measuring NPD
+=======================================================================
+
+
+Inputs {.sidebar data-width=400}
+-------------------------------------
+
+### Test Data from Six Survey Items
+
+
+These six survey questions are designed to measure a person's score on the Narcissistic Personality Disfunction scale.
+
+We have collected test data from 100 individuals so that we can improve our index by selecting which items to keep and which to drop.
+
+**Select three survey questions** which generate the highest Cronbach's Alpha score possible. You want to keep items that are highly-correlated. 
+
+
+```{r}
+q1 <- rnorm(100)
+
+q2 <- q1 + rnorm(100,0,3)
+
+q3 <- q1 + 10*rnorm(100)
+
+q4 <- q1 + 0.5*rnorm(100)
+
+q5 <- rnorm(100)
+
+q6 <- q1 + rnorm(100)
+
+df <- data.frame( beerpong=q1, salmon=q2, beard=q3, famguy=q4, prince=q5, santacon=q6 )
+
+# use panel.smooth and upper.panel.cor below
+# pairs( dat, lower.panel=panel.smooth, upper.panel=panel.cor)
+
+survey.questions <- 
+  c( "Do you enjoy beer pong?",
+     "Do you wear salmon-colored shorts?",
+     "Do you think beards are cool?",
+     "Do you enjoy Family Guy?",
+     "Do you like music by Prince?",
+     "Would you ever attend Santacon?" )
+```
+
+```{r}
+checkboxGroupInput( "cb.bro", 
+                    label = h3(""),
+                    choiceNames=survey.questions, choiceValues=names(df),
+                    selected=names(df) )
+```
+
+
+<br>
+<br>
+
+***
+
+**INDEX RELIABILITY MEASURES**
+
+We want a set of items which produce a high reliability measure to ensure our data is consistently measuring our construct and has low measurement error or "noise". Conbach's Alpha is a measure of the reliability of an index. 
+
+
+| Cronbach's Alpha Score  |  Interpretation   |  
+|:----------|:--------------- | 
+| 0.9 - 1.0 | Excellent  |  
+| 0.8 - 0.9 | Good  |  
+| 0.7 - 0.8 | Acceptable  |  
+| 0.6 - 0.7 | Marginally reliable  |  
+| Below 0.6 | Your index is unreliable   |  
+
+
+
+<br>
+
+
+
+
+
+
+
+Row {.tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+
+
+### Correlation Matrix {data-width=700}
+
+
+```{r}
+renderPlot({
+
+  d2 <- selected.bro.vars()
+  pairs( d2, lower.panel=panel.smooth, upper.panel=panel.cor )
+
+})
+```
+
+
+### Interpretation
+
+
+```{r}
+knitr::include_graphics("images/interpretation.png")
+```
+
+
+
+
+
+Row
+-----------------------------------------------------------------------
+
+
+### Cronbach's Alpha {data-width=300}
+
+
+```{r}
+selected.bro.vars <- reactive({
+ 
+  df %>% select( input$cb.bro )
+
+})
+
+# Report Alpha Level
+renderValueBox({
+  
+  d2 <- selected.bro.vars()
+  a1 <- alpha( d2, check.keys=TRUE )$total$raw_alpha
+  valueBox(
+    value = round(a1,2),
+    caption="Cronbach's Alpha",
+    icon = "fa-sliders",
+    color = if ( a1 >= 0.6 ) "success" else "warning"
+  )
+  
+})
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSTRUCTIONS
+=======================================================================
+
+
+Row
+-----------------------------------------------------------------------
+
+### INSTRUCTIONS {data-width=400}
+
+
+Use the Census Data on the "Index Design" tab to complete this part of the assignment.
+
+Your task is to create a reliable **Index of Community Well-Being**. A community is healthy if we expect citizens to achieve a good quality of life and economic stability while living there.
+
+You can approach the task by constructing and index where a high score on the scale would indicate well-being. Alternatively, you can identify items that measure the absence of well-being (the high and low ends of the scale can easily be reversed). Either way, you should seek to create a reliable index - one that has a high Cronbach's Alpha score (at the very least above a 0.6).
+
+
+
+**STEP 1:**
+
+Select the five variables you would like to use for your **Community Well-Being Index**. The selected variables must generate a Cronbach's Alpha of AT LEAST a **0.6** in order to be reliable. Report which variables you have selected, and the alpha you have achieved.
+
+**STEP 2:**
+
+Take a screen shot of the correlation structure and alpha score for these variables. Include the screenshot in your report.
+
+**STEP 3:**
+
+Describe the latent construct that you believe you are measuring. Do you think your variables are a good measure of community well-being, or are they measuring a specific dimension of strength or something else completely?
+
+For example, IQ and creativity are both measures of intelligence, but they measure distinct dimensions (you can have high analytic capacity, i.e. IQ, but low creativity, or vice-versa - having one does not imply you have the other so they are independent dimensions). They are typically measured using different types of tests that produce distinct indices. When creating a new index it is helpful to be clear about which construct you believe your measure represents.
+
+<br>
+
+**WHAT TO SUBMIT**
+
+*	Write up these findings and submit with Part I of your assignment on Canvas. 
+ 
+
+
+
+
+<br>
+
+
+### DATA DICTIONARY {data-width=400}
+
+
+This exercise uses Census data from the 2012 American Communities Survey made available through the [Diversity and Disparities Project](https://s4.ad.brown.edu/projects/diversity/Researcher/Bridging.htm).  
+
+**DATA DICTIONARY**
+
+```{r}
+renderTable({ var.df[c("VARIABLE","LABEL")] })
+```
+
+
+
+
+
+
+
+Index Design
+=======================================================================
+
+
+Inputs {.sidebar data-width=300}
+-------------------------------------
+
+### Census Tract Data
+
+**Select five variables that can be combined to construct an index of Community Well-Being.** Recall that a reliable instrument needs a Cronbach's Alpha of at least 0.6, and a strong measure has an Alpha above 0.8. 
+
+```{r}
+
+var.labels2 <- paste0( var.labels, "(", vars, ")" )
+  
+checkboxGroupInput( "checkbox", 
+                    label = "", 
+                    choiceNames=var.labels2, choiceValues=vars,
+                    selected = c("pvac12","ppov12","pflabf12","p10yrs12","p18und12") )
+```
+
+*** 
+
+Census data from the 2012 American Communities Survey made available through the [Diversity and Disparities Project](https://s4.ad.brown.edu/projects/diversity/Researcher/Bridging.htm).  
+
+
+Row
+-----------------------------------------------------------------------
+
+### Cronbach's Alpha
+
+
+```{r}
+selected.vars <- reactive({
+ 
+  dat %>% select( input$checkbox )
+
+})
+
+# Report Alpha Level
+renderValueBox({
+  
+  d2 <- selected.vars()
+  a1 <- alpha( d2, check.keys=TRUE )$total$raw_alpha
+  valueBox(
+    value = round(a1,2),
+    icon = "fa-sliders",
+    color = if ( a1 >= 0.6 ) "success" else "warning"
+  )
+  
+})
+```
+
+
+
+
+Row
+-----------------------------------------------------------------------
+
+### Correlation Matrix {data-width=700}
+
+```{r}
+renderPlot({
+
+  d2 <- selected.vars()
+  pairs( d2, lower.panel=panel.smooth, upper.panel=panel.cor )
+
+})
+```
+
+
+
+
+```{r, eval=F}
+renderTable({ var.df %>% filter( LABEL %in% input$checkbox ) })
+```
+
+
+
+
+
+
+
+
+Variable Correlations
+=======================================================================
+
+
+
+
+### Variables {data-width=340}
+
+```{r}
+renderTable({ var.df })
+```
+
+
+### Correlation Matrix {data-width=700}
+
+```{r, eval=F}
+renderTable({
+  downloads <- tail(pkgData(), n = input$maxrows)
+  downloads <- downloads[,c("date", "time", "size", "r_version", 
+                            "r_arch", "r_os", "package")]
+  downloads[order(nrow(downloads):1),]
+})
+```
+
+
+```{r, eval=F}
+renderPlot({
+
+  mcor <- round( cor( dat ), 2 )
+  # Hide upper triangle
+  mcor[ upper.tri(mcor) ] <- ""
+  upper <-as.data.frame( mcor )
+  upper %>% pander()
+  # pairs( dat, lower.panel=panel.smooth, upper.panel=panel.cor2 )
+
+})
+```
+
+```{r, results="asis", eval=F}
+  mcor <- round( cor( dat ), 2 )
+  # Hide upper triangle
+  mcor[ upper.tri(mcor) ] <- ""
+  upper <-as.data.frame( mcor )
+  print( xtable(upper), type="html"  )
+```
+
+
+```{r}
+renderTable({
+
+  mcor <- round( cor( dat ), 2 )
+  mcor[ upper.tri(mcor) ] <- ""
+  upper <-as.data.frame( mcor )
+  upper
+  
+}, rownames = TRUE )
+```

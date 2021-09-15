@@ -1,0 +1,102 @@
+---
+title: 'Lab 06: Bringing it all together'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output:
+  rmdformats::downcute:
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: false
+    highlight: tango
+    df_print: paged
+    includes:
+      after_body: 'footer.html'
+---
+
+# Taking a step back
+
+Labs 02 - 05 each required you to separate your source code from your "presentation" files. For most of you, this was the first time you had this division of labor for your analyses.
+
+
+As was mentioned previously, this separation produces two benefits:
+
+1. You can easily pass data processing steps back and forth to other colleagues or even yourself for future projects. Rather than parsing through 8 or 9 `R` chunks within an `RMD` file, you only have to review one `R` file that contains all the steps in a single file; and
+
+2. You allow the reader to both be aware of this source file that stores a lot of the pre-processing steps and to have confidence in you as the subject matter expert you're only showing them the most important steps. Sometimes that's a regression output or a data visualization but the point is that you're only showing code that is necessary for the audience to see.
+
+# Question
+
+Do you need a unique R file for each of your labs? Currently that is the case but it's worth asking this out loud.
+
+If you take a closer look at each of you R files, you'll notice that there is a lot of repetition. You load the same data sources, you make the same filtering, and you often use the same custom functions.
+
+When you notice this repetition, it is best practice to consolidate these separate files into one. That is the goal of this final lab. 
+
+# Lab Instructions 
+
+Create a single `.R` file that is used in both Lab 04 and Lab 05. Then, re-write your `import::here()` statement to pull from this singular `.R` file that should be referenced in both Lab 04 and Lab 05.
+
+You'll create two new Lab 04 and Lab 05 files within your `labs/wk06/` directory. Though these are "new" files, none of the output from either file should change.
+
+By creating a unified `.R` file, you give the reader extra confidence that whatever happened in that file is feeding into both documents. You also give yourself one spot to look at when/if an error should occur.
+
+## Data Manifest
+
+Within the [`Final Deliverables - Analysis`](https://ds4ps.org/cpp-528-spr-2021/project/project_rubric.html#final-deliverables-50-points) section of the project rubric, there is a note there about the presense of a "Data Manfiest". The rubric calls for a table that walks a user through the dimensions of the raw data sources every step of the way until you get to your final clean data source. 
+
+As long as you submit this lab, you can substitute the Data Manifest with this unified `.R` file that you submit. If no one in your team submits a unified `.R` file, the Data Manifest as a table requirement will remain.
+
+# Submission Instructions
+
+* your unified `.R` file that stores your data processing steps
+    + You do not have to call it `utilities.R` anymore, feel free to call it whatever you like.
+* your knitted RMD files from Lab 04 and Lab 05 that use your unified `.R` file
+* your HTML output from each RMD file
+
+
+Login to Canvas at <http://canvas.asu.edu> and navigate to the assignments tab in the course repository. Upload your zipped folder to the appropriate lab submission link.
+
+Remember to:
+
+* name your files according to the convention: **Lab-##-LastName.Rmd**
+* show your solution, include your code.
+* do not print excessive output (like a full data set).
+* follow appropriate style guidelines (spaces between arguments, etc.).
+
+See [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml) for examples.
+
+
+---
+
+<br>
+
+## Notes on Knitting
+
+If you are having problems with your RMD file, visit the [**RMD File Styles and Knitting Tips**](https://ds4ps.org/cpp-526-spr-2020/labs/r-markdown-files.html) manual.
+
+Note that when you knit a file, it starts from a blank slate. You might have packages loaded or datasets active on your local machine, so you can run code chunks fine. But when you knit you might get errors that functions cannot be located or datasets don't exist. Be sure that you have included chunks to load these in your RMD file.
+
+Your RMD file will not knit if you have errors in your code. If you get stuck on a question, just add `eval=F` to the code chunk and it will be ignored when you knit your file. 
+
+However, you cannot make every chunk `eval=F`. Only resort to this if you truly are stuck: that way I can give you credit for attempting the question and provide guidance on fixing the problem.
+
+
+<br>
+<br>
+
+<hr>
+
+<br>
+<br>
+
+
+<style>
+blockquote {
+    padding: 11px 22px;
+    margin: 0 0 22px;
+    font-size: 18px;
+    border-left: 5px solid lightgray;
+}
+
+</style>
+

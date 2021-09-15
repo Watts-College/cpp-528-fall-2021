@@ -1,0 +1,573 @@
+---
+title: 'Lab 02 - Preparing Data For Analysis'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output:
+  rmdformats::downcute:
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: false
+    highlight: tango
+    df_print: paged
+    includes:
+      after_body: 'footer.html'
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=F, warning=F, eval=T)
+```
+
+For this lab you will work on preparing your dataset for analysis and streamlining the process of making sense of the data by improving the documentation and by writing some helper functions that will allow you to query the Longitudinal Tracts Data Base (LTDB) to search for the variables you need for your analysis. **[To go to the lab instructions, click here](#lab-instructions).**
+
+
+
+# Building Better Datasets
+
+The LTDB is a great resource for over-time analysis of communities because they have harmonized 40 years of census data by apportioning old data so it fits the new 2010 census tracts and allows for analysis of consistent geographic units over time (if you are changing your tract boundaries and adding more tracts but not changing older data your analysis will be completely meaningless). 
+
+Unfortunately, they have done an OK job a documentation but a horrible job at making the data easy to use. 
+
+To overcome this we are going to restructure our input census datasets to enable us to fully utilize the over-time aspects of the data. 
+
+We are also going to build a machine-readable data dictionary to allow us to find the variables we need quickly using some custom functions you will write. 
+
+
+## Current Issues With LTDB Data
+
+The database currently has the following issues: 
+
+* Inconsistent variable names that make merges and over-time calculations hard. 
+* Capitalization is used inconsistently throughout. 
+* There is no concordance file that shows which variables are available over time. 
+* Datasets lack sufficient meta-data describing census tracts needed for most analysis. 
+* Datasets are organized by census tables instead of by time periods, making it hard to join them. 
+* The format of unique IDs needed to merge data changes.
+* The 2010 data is inconsistently labeled as either 2010 or 2012, depending on the source. 
+
+## Solutions 
+
+The data is currently organized into 10 tables:
+
+* 1970 variables from the census long form (sample)
+* 1970 variables from the full census (full)
+* 1980 variables from the census long form (sample)
+* 1980 variables from the full census (full)
+* 1990 variables from the census long form (sample)
+* 1990 variables from the full census (full)
+* 2000 variables from the census long form (sample)
+* 2000 variables from the full census (full)
+* 2010 variables from the American Community Survey (sample)
+* 2010 variables from the full census (full)
+
+The variables are measured at the Census Tract level using 2010 census tracts. Even though the tracts are consistent across all of the data the meta-data describing tracts is sparse and inconsistent. 
+
+The organization of data by census form is useful for census people building the datasets, but awkward for anyone trying to use the data. It forces the user to look at many more datasets than necessary when searching for variables. It also forces the user to conduct additional merges. 
+
+We have built a new data dictionary that solves these issues. It enables searching for variables by topic and by availability for our period of study, and makes it possible to query the data dictionary in real-time while conducting analysis. 
+
+### Optional code walkthrough
+
+This code walks through how the data concordance file was created. **You do not need it to complete lab 02**. It exists solely to provide you context for how this file was created.
+
+```{r}
+# load necessary packages
+library( tidyverse )
+library( here )
+library( pander )
+```
+
+#### `r emo::ji("construction")` Caution `r emo::ji("construction")`
+
+The `here::here( "data/rodeo/ltdb_data_dictionary.csv" )` file does not exist yet. If you want it to exist, go down to ["Lab Instructions"](#lab-instructions) and look for ["Data Concordance File"](../data/LTDB-DATA-DICTIONARY.xlsx) where you'll make it using a combination of Excel and the [codebook](../data/LTDB-codebook.pdf) for this week's lab.
+
+```{r}
+# store data dictionary file path
+DD_FILEPATH <- here::here( "data/rodeo/ltdb_data_dictionary.csv" )
+
+# import data dictionary
+dd <- read.csv( DD_FILEPATH, stringsAsFactors=F )
+
+# remove the second root column
+dd <- select( dd, -root2 )
+
+# view a subset of columns 
+dd[ c(1:5,15:17), ] %>% pander()
+```
+
+
+* The **root** field reports the variable name "root" without the year ID at the end so variables are grouped together properly. 
+* The **category** groups variables by theme like race, ethnicity, income, and education to make it easier to search for variables of interest. 
+* The variable **definition** comes from the census via the LTDB code book when available.
+
+After that, there are 10 new columns for the 10 original datasets. If the variable appears in the dataset then the variable name is reported as it appears in its original form, making it possible to find the variables in the original tables. The "f" stands for "full" and "s" for "sample". Note that we convert all variable names to lowercase in the rodeo dataset.  
+
+
+
+
+You can see we have organized variables more intuitively by concepts (race, income, etc.) and we have organized variables by time so that we can easily determine if a specific variable is availble over our period of study since coverage changes so much. 
+
+This new concordance version of the data dictionary was created by reading in all of the current datasets, compiling all of the current variable names, organizing them by source, copying some definitions from the current PDF of the LTDB dictionary, and saving the table as a new CSV file. 
+
+
+```{r, eval=F}
+# store the raw data directory
+RAW_DATA_DIR <- here::here("data/raw/")
+
+# print a list of files in the directory
+all_files <- list.files(RAW_DATA_DIR)
+
+# store the relevant files
+relevant_files <-
+  # from the list, use regex to only extract the relevant files
+  stringr::str_subset(string = all_files, pattern = "_(sample|fullcount).csv") %>%
+  # add the static file path back to the relevant files
+  purrr::map_chr(.f = ~ glue::glue(RAW_DATA_DIR, .x))
+
+
+# read a file
+# create code for type (full/sample)
+# create code for year
+# return a tidy table with var attributes
+
+all.sets <- NULL
+
+# notice the singular name that represents one element within the vector
+for( relevant_file in relevant_files )
+{
+  type <- ifelse( grepl( "sample", relevant_file ), "sample", "full" )
+  year <- 
+    # extract the year
+    stringr::str_extract(relevant_file, "_\\d{4}_") %>% 
+    # convert from string to numeric
+    readr::parse_number()
+  # read data
+  dat <- read.csv( relevant_file )
+  vars <- names(dat) 
+  d <- data.frame( vars, year, type, stringsAsFactors=F )
+  all.sets <- rbind( all.sets, d )
+  
+}
+
+
+head( all.sets )
+
+length( unique( all.sets$vars ) )
+
+all.sets$year.t <- paste0( all.sets$year, ".", substr( all.sets$type, 1, 1 ) )
+
+x <- all.sets$vars
+
+x <- tolower(x)
+
+x[ x == "state" ]  <- "stateXX"
+x[ x == "county" ] <- "countyXX"
+x[ x == "tract" ]  <- "tractXX"
+x[ x == "tractid" ]  <- "tractidXX"
+
+# remove census SF and SP table suffixes
+# on handful of variable names 
+
+x <- gsub( "[0-9]{2}sp1$", "sp1XX", x )
+x <- gsub( "[0-9]{2}sp2$", "sp2XX", x )
+x <- gsub( "[0-9]{2}sf3$", "sf3XX", x )
+x <- gsub( "[0-9]{2}sf4$", "sf4XX", x )
+
+root <- substr( x, 1, nchar(x)-2 ) 
+
+all.sets$root <- root 
+
+d <- select( all.sets, root, year.t, vars )
+
+# convert from tidy table
+# to a matrix of variables
+#
+# one concept per row ("root")
+# columns are years + full or sample
+# cells are variable names from raw files
+
+dd <- spread( d, key=year.t, value=vars, fill="" )
+
+
+# problem solve some var names 
+
+> d[ c(51,64), ]
+     root year.t     vars
+51 POP70S 1970.s POP70SP2
+64 POP70S 1970.s POP70SP1
+> d[ c(168,221), ]
+      root year.t     vars
+168 pop80s 1980.s pop80sf3
+221 pop80s 1980.s pop80sf4
+> d[ c(293,294), ]
+      root year.t     vars
+293 POP90S 1990.s POP90SF3
+294 POP90S 1990.s POP90SF4
+> d[ c(486,489), ]
+     root year.t    vars
+486 tract 2010.f tractid
+489 tract 2010.f tractXX
+
+
+# copied variable names and definitions from the 
+# current PDF of the LTDB data dictionary
+
+# first open the data dictionary
+DATA_DICTIONARY_PATH <- here::here("data/LTDB-codebook.pdf")
+# store the command to open the file programtically
+open_pdf_command <- glue::glue("open", " ", '"', DATA_DICTIONARY_PATH, '"')
+# open the pdf
+system(open_pdf_command)
+
+# NOTE: with your cursor, go to page 2. From page 2, look for the text 
+# "% white, non-Hispanic *"
+# hold your cursor and highlight all the text (include check marks)
+# until you see the following text on page 4
+# "% female-headed families with children"
+# Finally, copy the text.
+
+# store the copied text within the variable y.
+y <- readr::clipboard()  
+
+if (length(y) == 745) {
+  print("You've copied the same amount of text as the instructor. Move forward.")
+} else {
+  print("You have not copied the same amount of text as the instructor. YMMV.")
+}
+
+y2 <- gsub( " [*]", "", y )
+y3 <- gsub( "%", "pct", y2 )
+y4 <- y3[ -49 ]
+
+def <- matrix( y4, ncol=2, byrow=T )
+def <- as.data.frame( def, stringsAsFactors=F )
+names( def ) <- c("definition","root")
+def$root <- substr( def$root, 1, nchar(def$root)-2 ) 
+
+head( def )
+
+# add definitions to subset of vars
+
+dd <- merge( dd, def, by="root", all.x=T )
+
+new.order <- 
+  c("root", "definition", 
+    "1970.f", "1970.s", "1980.f", "1980.s", 
+    "1990.f", "1990.s", 
+    "2000.f", "2000.s", "2010.f", "2010.s" )
+
+dd <- dd[ new.order ]
+
+# replace NAs with blank cells in definition column 
+dd$definition[ is.na( dd$definition ) ] <- ""
+
+write.csv( dd, here::here("data/wrangling/ltdb_data_dictionary.csv"), row.names=F )
+saveRDS( dd, here::here("data/wrangling/ltdb_data_dictionary.rds" ))
+```
+
+
+Note the use of regular expressions for efficient data wrangling:
+
+```r
+# find all cases where "sf3" is preceeded 
+# by two numbers and occurs at the end of a line
+x <- gsub( "[0-9]{2}sf3$", "sf3XX", x )
+```
+
+Similarly, we have combined all full and sample versions of the data from each year into a single file to simplify the database. Note that the new data dictionary reports whether a variable comes from the FULL or the SAMPLE table. This is useful information to understand the data generation process, so it should be easily accessible in the documentation, but it is not a great way to structure your data tables.
+
+Variable names have been standardized as part of the process. New TRACT IDs have been created in a standard format that clearly dilineates state, county and tract FIPS codes and include a leading string so that the variables cannot become corrupted by the leading zeros problem. 
+
+And finally we have moved all census tract meta-data into on a single file which makes it easy to add to any dataset when desired. The new files consist of:
+
+* LTDB-1970.rds  
+* LTDB-1980.rds  
+* LTDB-1990.rds  
+* LTDB-2000.rds  
+* LTDB-2010.rds  
+* LTDB-META-DATA.rds   
+
+
+The wrangling that was applied to the raw data are described here: 
+
+[PROJECT-DATA-STEPS](PROJECT-DATA-STEPS.html) 
+
+**Note:** It is BAD practice to do data cleaning in Excel when it can be avoided. The reason for this is Excel requires manual processes that are not catalogued via a script. As a result, no record exists of what was actually done to the data. If you start to encounter errors in the data you cannot trace where they came from, or more importantly how to fix them. 
+
+With a script, on the other hand, the current dataset can always be reproduced from the original raw files and all changes can be tracked, replicated, and refined as necessary. 
+
+Excel is a great tool, and you will use it often for projects. Just make sure to log files before and after manual work if you are altering data and create a log of changes that were made. 
+
+
+## RDS vs CSV formats 
+
+Note that these are saved as RDS files instead of CSV files. There are two good reasons to do this:
+
+First, the main difference between the file formats is RDS (R data set) files preserve variables type like numeric, character, factor, etc. R tries to guess at variable types when the data is loaded from a CSV file, but it does a poor job of it (for good reason, it is hard to automate without knowledge of the intended use of the data). As a result, it creates additional efforts needed to convert all of your variables to the proper classes after loading a CSV file. Whereas that step can be skipped when storing data in RDS files. 
+
+Second, RDS files by default are compressed, which means they take up less space on your hard drive and are easier to share. On average they are less than one-third the size of equivalent CSV files. 
+
+If the files are not extremely large, I find it useful to save both RDS and CSV versions in a folder for the convenience of opening a CSV file in Excel to preview the data. GitHub will also render small CSV files in a web browser for previewing purposes. In addition, if you share files with collaborators CSV is more convenient because most stats programs can use them, whereas RDS files are not as common. 
+
+
+## Data Directory Structure
+
+Your project will have the following directory structure for data component: 
+
+```
+project (main github folder)
+|
+|-- data (folder)   
+|   |-- data-dictionary.csv|pdf|rmd|html
+|   |-- README.md (documentation for what data folder contains)
+|
+|   |-- raw (folder for original datasets)
+|       |-- LTDB_Std_1970_fullcount.csv 
+|       |-- ltdb_std_1970_sample.csv 
+|       |-- cbsa-crosswalk.rds
+|       |-- etc.
+|
+|   |-- wrangling (folder for data steps)
+|       |-- scripts for data cleaning
+|
+|   |-- rodeo (folder for data used in models)
+|       |-- LTDB-1970.rds
+|       |-- LTDB-1980.rds
+|       |-- etc.
+|
+```
+
+You can keep documentation about the data in the main data folder so that it is easy to find, and you will want to create a README file that describes folder contents and conventions. 
+
+Keep all of your data files organized in subdirectories. As a general rule of thumb:
+
+Files in the **raw** folder will contain all of the original data files you have obtained through primary data collection (extract from survey platforms, for example), through queries, downloads, or file shares. These files should be treated as sacrosanct and be used for read-only purposes. NEVER alter your raw data, because if you introduce and error and save the file you may not be able to recover the original data. Or if someone ever challenges the integrity of your analysis because of problems with the data, you want to be able to trace the problems to the source instead of assuming it is an error. This folder is also the appropriate place for documentation of the raw data, which includes things like the parameters used to produce a query in an external database, protocols from interviews, questions from surveys, code used to scrape data from a website, etc. Anything that documents how the data was produced should be archived appropriately. 
+
+Files in the **wrangling** folder will include mostly scripts and intermediary steps you use to clean and transform your data. Any intermediary datasets you produce as part of the process that are not used in the final analysis can also live here. I will also include descriptive reports or tables that I create to check for errors in the datasets or to describe the data. 
+
+You will load data from the **raw** folder, and ultimately write data to the **rodeo** folder using scripts in your **wrangling** folder. This means that a script needs to be able to go up one level to the main folder, and back down into another folder for read or write steps. 
+
+This is why the [`here` package](https://ds4ps.org/cpp-528-fall-2020/schedule/#intro-to-portability--rstudio-projects) is introduced to you this week: so that you only need to point to where the data lives at the time of loading rather than constantly being aware of where your working directory is located at all times. *However, it is useful to note the path trick for going up a level*:
+
+```
+dat <- read.csv( "../raw/file-name.csv" )
+```
+
+The two dots tell R to go back to the main data folder (up one level), then down into the raw folder to find the dataset. Similarly when writing a file you can use the same convention to get to "../rodeo/final-data.rds".
+
+And finally, what is a **rodeo** dataset? These are files that will be used to produce analysis that appear in your reports or publications. They are called "rodeo" datasets beacause after they have been wrangled they are ready for the big show - use in models. Typically during your analysis you should only be reading files from the rodeo folder. 
+
+![Data wrangling photo of cowboy](images/data-cowboy.png){width="150%"}
+
+
+You will always do variable manipulation and transformation as part of your analysis. For example, recoding the levels of a variable like combining states into regions, transformation like logging or squaring variables, or the creation of dummies. Should you include these in the data wrangling folder or in the analysis folder? 
+
+Data wrangling includes all of the steps in building, restructuring, and fixing the data through cleaning or reformatting. These processes should all occur during the data engineering steps. Feature engineering, the process of creating new measures by applying algorithms or mathematical models to existing data, often using advanced tools like geo-spatial algorithms or machine-learning models,is another kind of data engineering step. 
+
+Variable transformations, however, are an important component of the modeling process that often require interative processes of testing multiple specifications for model fit and to identify issues related to outliers, etc. As such, variable transformations are typically a part of the analysis dataset.  So there is not a pure distinction between the two. Use your judgement about where to draw the line to keep the process well-organized and file delineation clear. 
+
+<br>
+<br>
+
+<hr>
+
+<br>
+<br>
+
+
+
+# Data Preparation Process
+
+Although it can be tedious at times, data wrangling is one of the most important stages of the project because (1) it will be where you spend 80% of your time on most projects, and (2) it is the easiest place to introduce errors that are hard to find and can have a big effect on your final results. 
+
+What all is included in data wrangling? It will vary greatly depending upon project, but the CRISP-DM model outlines the following steps: 
+
+**Data Understanding**
+
+The second stage consists of collecting and exploring the input dataset. The set goal might be unsolvable using the input data, you might need to use public datasets, or even create a specific one for the set goal.
+
+1.	Collect Initial Data  
+  - Initial Data Collection Report  
+2.	Describe Data  
+  - Data Description Report  
+3.	Explore Data   
+  - Data Exploration Report  
+4.	Verify Data Quality  
+  - Data Quality Report  
+
+**Data Preparation** 
+
+As we all know, bad input inevitably leads to bad output. Therefore no matter what you do in modeling — if you made major mistakes while preparing the data — you will end up returning to this stage and doing it over again.
+
+1.	Select Data  
+  - The rationale for Inclusion/Exclusion  
+2.	Clean Data  
+  - Data Cleaning Report  
+3.	Construct Data  
+  - Derived Attributes  
+  - Generated Records  
+4.	Integrate Data  
+  - Merged Data  
+5.	Format Data  
+  - Reformatted Data  
+6. Dataset Description  
+
+
+
+## Documentation 
+
+What documentation should you produce? 
+
+If you have ever started working with a new dataset that has no documentation you quickly learn the value of the data dictionary. Without it you will have a hard time making sense of variables names, or understanding the measure they represent. For example, if you have a variable called "leadership" that reports measures on a scale of 1 to 10, without some description of the scale and items used to create it, it is impossible to know what the measure represents. If you are using archival datasets the dictionary likely exists already. 
+
+Beyond that, the important things to document during the process of merging and cleaning data are: 
+
+* the mechanical steps of combining data from multiple sources, especially the use of keys for merging. 
+* all steps where observations are dropped from the dataset and justifications for omitting them, such as filtering out all rural counties from the project since they are not eligible for the programs of interest. 
+* algorithms that recode data. 
+
+I highly recommend keeping a data journal as you start a project - a place where you can make notes about the process and your thinking about specific decisions. It will greatly aid in creating documentation when it is time. 
+
+I also strongly suggest to create a data manifest that reports all of the sources that were combined to create your database, and logs all of the steps that were applied that resulted in loss or omission of data. When you conduct merges, filters, or remove cases with missing values pay attention to how each step effects your sample size. 
+
+The right answer to the question, how much documentation do I provide, is how much is needed to reproduce your work? If you were giving instructions to an employee for how they should analyze the data, or if someone wanted to try to reproduce your analysis without having your code, how much information would they need? What consequential thing did you do to the data that you are not including in the manifest? Yeast represents a tiny proportion of the ingredients in bread by volume and weight, but leaving it out results in a very different final product. Are you leaving the most important ingredient off the recipe because they seem small?
+
+
+
+
+
+# Lab Instructions 
+
+The end goal of data wrangling is for the data to be clean and easy to use during the analytical stage of the project. For this lab you will add meaningful metadata about the LTDB dataset to a machine-readable concordance file that will be used to greatly improve the usability of the data. 
+
+
+## Part 1: Data Concordance 
+
+Download the [data concordance spreadsheet](../data/LTDB-DATA-DICTIONARY.xlsx) that was created from the steps described above and store it within the `data/rodeo` directory. You will see that it has all of the information about variable changes over time, but it has incomplete meta-data that describes the variables.
+
+### `r emo::ji("construction")` Caution `r emo::ji("construction")`
+
+If you are unsure what the `data/rodeo` directory is, please [go back to the data directory structure](#data-directory-structure).
+
+
+Using the [LTDB Codebook](../data/LTDB-codebook.pdf) copy and paste the Census definitions of each field into the "description" column of the data within the data concordance spreadsheet. 
+
+Using the **category** column in the file, create meaningful groups for the variables by assigning a group label to each. The LTDB codebook includes some, such as "Variable Group 1: Race and Age by Race" on page 5. Use these as a guide, but feel free to create your own taxonomy that helps you make sense of the variables. 
+
+When you are done save the Excel file as a CSV file with in this location: `"data/rodeo/ltdb_data_dictionary.csv"`. Everyone should now be able to load in the dictionary in R using the following commands:
+
+```r
+# store data dictionary file path
+DD_FILEPATH <- here::here( "data/rodeo/ltdb_data_dictionary.csv" )
+
+# import data dictionary
+dd <- read.csv( DD_FILEPATH, stringsAsFactors=F )
+```
+
+
+You lose the color coding when the file is converted to a CSV file, so it is easier to do the initial coding in the Excel format. Delete any empty rows before saving the CSV file (color-coded rows used for formatting only). 
+
+We now have a machine-readable data dictionary. This allows us to create some tools that make the full database easier to use. 
+
+## Part 2: Build a Variable Filter
+
+Part of the challenge of working with this dataset is its size. It's hard to keep track of dozens of variables at once, especially when the abbreviations are not very helpful and many concepts are closely related. 
+
+### Separate data processing steps within a separate file
+Create a couple of filters for your data dictionary that make the meta-data easier to access and easier to use. These functions will live in a separate file called `utilties.R`.
+
+### Import objects within that `.R` file into your `.rmd` file
+You will then import your functions within that file into a `.rmd` file, where you will hide _how_ you created these functions and merely _show_ the user what they do. In your `.rmd` file, you need to use the `source()` function to import your functions within the `utilties.R` file.
+
+After reading your new CSV concordance file into your `.R` file, create the following custom functions: 
+
+**ONE**: Filter variables by theme or group. Write a function that takes as an argument one or more of the groups that you just created in the concordance file under the "category" field and returns all of the variables associated with that group. 
+
+The function should return all of the rows of the dataframe that belong to the group. 
+
+**TWO**: Create a function that searches variable descriptions for a specific string and returns any variables that match. For example, if I searched for "income" I would want variables like median household income and per capita income. 
+
+I would recommend making use of the **grepl()** function or the [`stringr` package](https://stringr.tidyverse.org/). Both take your search term as an argument and returns a logical vector specifying which elements matched against your term. Note the importance of the ignore case argument, and the use of regular expression anchors to specify word position. 
+
+```{r}
+bag.of.words <- c( "cat", "dog", "catfish", "hat", "CAT" )
+
+grepl( "cat",  bag.of.words, ignore.case=F )
+grepl( "cat",  bag.of.words, ignore.case=T )
+grepl( "cat$", bag.of.words, ignore.case=T )
+```
+
+You function will use a user-provided string as the only argument, and print a table of variables that match the criteria. 
+
+```{r, eval=F}
+these <- grepl( "string", vector, ignore.case=T )
+dat.sub <- dat[ these, ]
+return( dat.sub )
+```
+
+**THREE**: Create a function to filter variables by time periods. Specifically, the user will specify the time periods of interest for the study and the function will identify all variables that have measures for those periods. For example, I if I want to use the data for a study that covers 1990, 2000, and 2010 which variables are available for all three periods? 
+
+Note that column names contain the time periods, so similar to the previous function you can use **grepl()** to identify all columns that meet your critera. Once you have selected the appropriate columns you need to write a logical statement that checks variable availability for each year. We do not care whether the measure comes from the full Census, the long form sample, or the ACS as long as at least one measure is availabe for each of the specified time periods. 
+
+Return a table with all of the variables that meet the criteria. 
+
+
+## Challenge Question 
+
+Write a function that allows the user to specify a list of the generic "root" variable names and applies a column select function to the current active LTDB dataset. 
+
+Note that the variable suffixes change from year to year in the variable names (ex mhv80, mhv90, mhv00), and 2010 uses either 2010 or 2012 as the suffix. You also won't know which years of the database are currently loaded, so you will need the function to be generic enough to try all versions of the selected variables. 
+
+
+
+
+-----
+
+
+<br>
+
+# Submission Instructions
+
+When you complete the lab you will submit four individual files:
+
+* your CSV file containing your updated data concordance
+* your `utilities.R` file
+* your knitted RMD file that demonstrates the use of your three new functions and
+* your HTML output of your RMD file
+
+Login to Canvas at <http://canvas.asu.edu> and navigate to the assignments tab in the course repository. 
+
+Remember to:
+
+* name your files according to the convention: **Lab-##-LastName.Rmd**
+* do not print excessive output (like a full data set).
+* follow appropriate style guidelines (spaces between arguments, etc.).
+
+See [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml) for examples.
+
+
+---
+
+<br>
+
+## Notes on Knitting
+
+If you are having problems with your RMD file, visit the [**RMD File Styles and Knitting Tips**](https://ds4ps.org/cpp-526-spr-2020/labs/r-markdown-files.html) manual.
+
+Note that when you knit a file, it starts from a blank slate. You might have packages loaded or datasets active on your local machine, so you can run code chunks fine. But when you knit you might get errors that functions cannot be located or datasets don't exist. Be sure that you have included chunks to load these in your RMD file.
+
+Your RMD file will not knit if you have errors in your code. If you get stuck on a question, add `eval=F` to the code chunk and it will be ignored when you knit your file. _Please let the instructor know_ at the time of submission that you needed to rely on this workaround. That way I can give you credit for attempting the question and provide guidance on fixing the problem.
+
+
+<br>
+<hr>
+<br>
+
+<style>
+blockquote {
+    padding: 11px 22px;
+    margin: 0 0 22px;
+    font-size: 18px;
+    border-left: 5px solid lightgray;
+}
+
+</style>
+

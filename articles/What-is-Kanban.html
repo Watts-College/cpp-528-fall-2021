@@ -1,0 +1,313 @@
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+html {
+  scroll-behavior: smooth;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 30px auto 0 auto;
+  padding: 10px;
+}
+body[data-mode="light"] {
+  color:  #222;
+  background-color:  whitesmoke;
+}
+body[data-mode="dark"] {
+  color:  #eee;
+  background-color:  #333;
+}
+body[data-mode="sepia"] {
+  color:  #5b4636;
+  background-color:  #f4ecd8;
+}
+body[data-mode="solarized-light"] {
+  color:  #586e75;
+  background-color:  #fdf6e3;
+}
+body[data-mode="groove-dark"] {
+  color:  #cec4ac;
+  background-color:  #282828;
+}
+body[data-mode="solarized-dark"] {
+  color:  #93a1a1;
+  background-color:  #002b36;
+}
+body[data-loaded=true] {
+  
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+body[data-images=false] img {
+  display: none;
+}
+a {
+  color: #0095dd;
+  text-decoration: none;
+}
+#reader-domain {
+  font-family: Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  border-bottom-color: currentcolor;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: inline-block;
+  direction: ltr;
+}
+#reader-domain > span:first-child {
+  font-size: 1.1em;
+}
+#reader-domain > span:last-child {
+  font-size: 0.8em;
+}
+#reader-title {
+  font-size: 1.6em;
+  line-height: 1.25em;
+  width: 100%;
+  margin: 20px 0;
+  padding: 0;
+}
+#reader-credits {
+  font-size: 0.9em;
+  line-height: 1.48em;
+  margin: 0 0 10px 0;
+  padding: 0;
+  font-style: italic;
+}
+#reader-estimated-time {
+  font-size: 0.85em;
+  line-height: 1.48em;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+#reader-credits:empty {
+  display: none;
+}
+.tts-speaking {
+  position: relative;
+}
+.tts-speaking::after {
+  content: '';
+  position: absolute;
+  left: -100vw;
+  top: -5px;
+  width: 300vw;
+  height: calc(100% + 10px);
+  box-shadow: 0 0 0 1000vw rgba(128, 128, 128, 0.2);
+}
+body[data-speech="false"] .tts-speaking::after {
+  display: none;
+}
+mark.hghlght {
+  background-color: #ffff81;
+}
+</style>
+  <style id="user-css">body {
+  padding-bottom: 64px;
+}
+a:visited {
+  color: #d33bf0;
+}
+a:link, a:link:hover, a:link:active {
+  color: #0095dd;
+}
+a:link {
+  text-decoration: none;
+  font-weight: normal;
+}
+pre {
+  white-space: pre-wrap;
+}
+pre code {
+  background-color: #eff0f1;
+  color: #393318;
+  font-family: monospace;
+  display: block;
+  padding: 5px 10px;
+}
+body[data-mode="dark"] pre code {
+  background-color: #585858;
+  color: #e8e8e8;
+}
+
+/* CSS for sans-serif fonts */
+body[data-font=sans-serif] {}
+/* CSS for serif fonts */
+body[data-font=serif] {}
+
+/* CSS for "sepia" theme */
+body[data-mode=sepia] {
+}
+/* CSS for "light" theme */
+body[data-mode=light] {}
+/* CSS for "dark" theme */
+body[data-mode=dark] {}</style>
+</head>
+<body data-images="true" data-mode="sepia" data-font="sans-serif" data-loaded="true">
+  <span></span> <!-- for IntersectionObserver -->
+  <a id="reader-domain" href="https://www.digite.com/kanban/what-is-kanban/">
+    <span>www.digite.com</span>
+    <span>/kanban/what-is-kanban/</span>
+  </a>
+  <h1 dir="auto" id="reader-title">What is Kanban?</h1>
+  <div dir="auto" id="reader-credits"></div>
+  <div dir="auto" id="reader-estimated-time">20-25 minutes</div>
+  <hr>
+  <div id="readability-page-1" class="page"><div>
+                        <div>
+							<div>
+                            <div>                               
+                                <div>
+<h5>Kanban Definition</h5>
+<p>Kanban is a visual system for managing work as it moves through a process. Kanban visualizes both the process (the workflow) and the actual work passing through that process. The goal of Kanban is to identify potential bottlenecks in your process and fix them so work can flow through it cost-effectively at an optimal speed or throughput.</p>
+<p><iframe loading="lazy" src="https://player.vimeo.com/video/236558214?title=0&amp;byline=0" frameborder="0" allowfullscreen="allowfullscreen" data-rocket-lazyload="fitvidscompatible" data-lazy-src="https://player.vimeo.com/video/236558214?title=0&amp;byline=0" data-was-processed="true"></iframe></p>
+
+<p><em><strong>TRIVIA</strong> — Kanban, also </em>spelt<em> “</em>kamban<em>” in Japanese, translates to “Billboard” (“signboard” in Chinese) that indicates “available capacity (to work)”. Kanban is a concept related to lean and just-in-time (JIT) production, where it is used as a scheduling system that tells you what to </em>produce,<em> when to produce it, and how much to produce.&nbsp;</em></p>
+<h5>Learn the Basics of Kanban:</h5>
+<ul>
+<li><a href="#origin-of-kanban">Where did Kanban originate?</a></li>
+<li><a href="#kanban-method">What is the Kanban Method?</a></li>
+<li><a href="#kanban-principles">Kanban Foundational Principles</a></li>
+<li><a href="#kanban-practices">6 Core Practices of the Kanban</a></li>
+<li><a href="#kanban-concept">How does Kanban work? – The Concept</a></li>
+<li><a href="#wip-limits">WIP Limits in Kanban</a></li>
+<li><a href="#kanban-in-it">Kanban in IT &amp; Software</a></li>
+<li><a href="#kanban-in-lean-agile">Kanban in Lean/ Agile development</a></li>
+<li><a href="#kanban-non-it">Kanban beyond Software &amp; IT</a></li>
+<li><a href="https://www.digite.com/swiftkanban/swiftkanban-free-trial/">Start using a Kanban Tool</a></li>
+</ul>
+<h5 id="origin-of-kanban">Where did Kanban originate? – A Brief History on Kanban</h5>
+<p><img src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/Taiichi_Ohno1.jpeg" alt="Taiichi Ohno" width="167" height="188" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/Taiichi_Ohno1.jpeg" data-was-processed="true"></p>
+<p>It all started in the early 1940s. The first Kanban system was developed by&nbsp;<a target="_blank" href="https://en.wikipedia.org/wiki/Taiichi_Ohno" rel="noopener">Taiichi Ohno</a>(Industrial Engineer and Businessman) for Toyota automotive in Japan. It was created as a simple planning system, the aim of which was to control and manage work and inventory at every stage of production optimally.</p>
+<p>A key reason for the development of Kanban was the inadequate productivity and efficiency of&nbsp;<a target="_blank" href="http://www.toyota-global.com/company/vision_philosophy/toyota_production_system/just-in-time.html" rel="noopener">Toyota</a>&nbsp;compared to its American automotive rivals. With Kanban, Toyota achieved a flexible and efficient just-in-time production control system that increased productivity while reducing cost-intensive inventory of raw materials, semi-finished materials, and finished products.</p>
+<p>A&nbsp;&nbsp;ideally controls the entire value chain from the supplier to the end consumer. In this way, it helps avoid supply disruption and overstocking of goods at various stages of the manufacturing process. Kanban requires continuous monitoring of the process. Particular attention needs to be given to avoid bottlenecks that could slow down the production process. The aim is to achieve higher throughput with lower delivery lead times. Over time, Kanban has become an efficient way in a variety of production systems.</p>
+<p><img title="Toyota Factory Kanban" src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Toyota-Factory-Kanban.png" alt="Toyota Factory Kanban" width="816" height="442" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Toyota-Factory-Kanban.png" data-was-processed="true"></p>
+<p><span> <span><span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=%E2%80%9CThe%20two%20pillars%20of%20the%20Toyota%20production%20system%20are%20just-in-time%20and%20automation%20with%20a%20human%20touch%2C%20or%20autonomation.%E2%80%9D%20%E2%80%93%20David%20J.%20Anderson&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">“The two pillars of the Toyota production system are just-in-time and automation with a human touch, or autonomation.” – David J. Anderson </a></span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=%E2%80%9CThe%20two%20pillars%20of%20the%20Toyota%20production%20system%20are%20just-in-time%20and%20automation%20with%20a%20human%20touch%2C%20or%20autonomation.%E2%80%9D%20%E2%80%93%20David%20J.%20Anderson&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">Click To Tweet</a></span></span></p>
+<h5 id="kanban-method"></h5>
+<p>While kanban was introduced by Taiichi Ohno in the manufacturing industry, it is David J. Anderson who was the first to apply the concept to IT, Software development and knowledge work in general in the year 2004. David built on the works by Taiichi Ohno, Eli Goldratt, Edward Demmings, Peter Drucker and others to define the&nbsp;, with concepts such as pull systems, queuing theory and flow. His first book on Kanban –&nbsp;<a target="_blank" href="https://www.amazon.com/Kanban-Successful-Evolutionary-Technology-Business/dp/0984521402" rel="noopener">“Kanban: Successfully Evolutionary Change for your Technology Business”</a>, published in 2010, is the most comprehensive definition of the Kanban Method for knowledge work.</p>
+<p><img title="Kanban Board" src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Kanban-Board.png" alt="Kanban Board" width="797" height="516" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Kanban-Board.png" data-was-processed="true"></p>
+<p>The Kanban Method is a process to gradually improve whatever you do – whether it is software development, IT/ Ops, Staffing, Recruitment, Marketing and Sales, Procurement etc. In fact, almost any business function can benefit from applying the principles of the Kanban Methodology.</p>
+<p>The Kanban body of knowledge has abstracted and benefited from the works of various thought leaders since the original book was written! People such as Don Reinertsen (author of Principles of Product Development Flow), Jim Benson (pioneer of <a href="https://www.digite.com/kanban/personal-kanban/">Personal Kanban</a>) and several others.</p>
+<p><span><span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=Kanban%20is%20not%20a%20software%20development%20lifecycle%20methodology%20or%20an%20approach%20to%20project%20management.%20It%20requires%20that%20some%20process%20is%20already%20in%20place%20so%20that%20Kanban%20can%20be%20applied%20to%20incrementally%20change%20the%20underlying%20process.%20-%20DJA&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">Kanban is not a software development lifecycle methodology or an approach to project management. It requires that some process is already in place so that Kanban can be applied to incrementally change the underlying process. - DJA </a></span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=Kanban%20is%20not%20a%20software%20development%20lifecycle%20methodology%20or%20an%20approach%20to%20project%20management.%20It%20requires%20that%20some%20process%20is%20already%20in%20place%20so%20that%20Kanban%20can%20be%20applied%20to%20incrementally%20change%20the%20underlying%20process.%20-%20DJA&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">Click To Tweet</a></span></p><h5 id="kanban-principles"></h5>
+<p>The Kanban Method follows a set of principles and practices for managing and improving the flow of work. It is an evolutionary, non-disruptive method that promotes gradual improvements to an organization’s processes. If you follow these principles and practices, you will successfully be able to use Kanban for maximizing the benefits to your business process – improve flow, reduce cycle time, increase value to the customer, with greater predictability – all of which are crucial to any business today.</p>
+<p><a target="_blank" href="https://www.digite.com/swiftkanban/swiftkanban-free-trial/" rel="noopener"><img src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban.jpg" alt="try kanban" width="728" height="90" data-lazy-srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban.jpg 728w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-300x37.jpg 300w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-640x79.jpg 640w" data-lazy-sizes="(max-width: 728px) 100vw, 728px" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban.jpg" sizes="(max-width: 728px) 100vw, 728px" srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban.jpg 728w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-300x37.jpg 300w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-640x79.jpg 640w" data-was-processed="true"></a></p>
+<p>The four foundational principles and six Core Practices of the Kanban Methodology are provided below:</p>
+
+<ul>
+<li><strong>Start with what you are doing now:</strong>&nbsp;The Kanban Method (hereafter referred to as just Kanban) strongly emphasizes not making any change to your existing setup/ process right away. Kanban must be applied directly to current workflow. Any changes needed can occur gradually over a period of time at a pace the team is comfortable with.</li>
+</ul>
+<ul>
+<li><strong>Agree to pursue incremental, evolutionary change:</strong>&nbsp;Kanban encourages you to make small incremental changes rather than making radical changes that might lead to resistance within the team and organization.</li>
+</ul>
+<ul>
+<li><strong>Initially, respect current roles, responsibilities and job-titles:</strong>&nbsp;Unlike other methods, Kanban does not impose any organizational changes by itself. So, it is not necessary to make changes to your existing roles and functions which may be performing well. The team will collaboratively identify and implement any changes needed.&nbsp;These three principles help the organizations overcome the typical emotional resistance and the fear of change that usually accompany any change initiatives in an organization.</li>
+</ul>
+<ul>
+<li><strong>Encourage acts of leadership at all levels:</strong>&nbsp;Kanban encourages continuous improvement at all the levels of the organization and it says that leadership acts don’t have to originate from senior managers only. People at all levels can provide ideas and show leadership to implement changes to continually improve the way they deliver their products and services.</li>
+</ul>
+<p><img title="Simple Kanban Board" src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Simple-Kanban-Board.png" alt="Simple Kanban Board" width="788" height="538" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Simple-Kanban-Board.png" data-was-processed="true"></p>
+<p><span> <span><span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=%E2%80%9CAsking%20people%20to%20change%20behavior%20is%20difficult%21%E2%80%9D%20%E2%80%93%20David%20J.%20Anderson&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">“Asking people to change behavior is difficult!” – David J. Anderson </a></span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=%E2%80%9CAsking%20people%20to%20change%20behavior%20is%20difficult%21%E2%80%9D%20%E2%80%93%20David%20J.%20Anderson&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">Click To Tweet</a></span></span></p>
+<p><em><strong><img src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/imperial-palace-japan1.jpg" alt="imperial-palace-japan" width="127" height="127" data-lazy-srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/imperial-palace-japan1.jpg 200w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/imperial-palace-japan1-150x150.jpg 150w" data-lazy-sizes="(max-width: 127px) 100vw, 127px" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/imperial-palace-japan1.jpg" sizes="(max-width: 127px) 100vw, 127px" srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/imperial-palace-japan1.jpg 200w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/imperial-palace-japan1-150x150.jpg 150w" data-was-processed="true">TRIVIA</strong> – A great example of a Kanban system is used today in <a target="_blank" href="http://sankan.kunaicho.go.jp/english/index.html" rel="noopener">Tokyo Imperial Palace Gardens</a> in Japan. The staff here uses a foolproof method to limit the flow of visitors. Each visitor receives a plastic card at the entrance, which must be returned while leaving the garden. Because the total number of cards is meaningfully limited, only so many visitors can stroll through the palace in a given time. New visitors have to wait in line </em>till<em> the next card/slot is available. The access to the palace is free, but it is granted only if the pre-allotted cards are available.</em></p>
+<h5 id="kanban-practices">6 Core Practices of the Kanban Method</h5>
+<ul>
+<li><strong>Visualize the flow of work:</strong>&nbsp;This is the fundamental first step to adopting and implementing the Kanban Method. You need to visualize – either on a physical board or an electronic Kanban Board, the process steps that you currently use to deliver your work or your services. Depending on the complexity of your process and your work-mix (the different types of work items that you work on and deliver), your Kanban board can be very simple to very elaborate. Once you visualize your process, then you can visualize the current work that you and your team are doing.</li>
+</ul>
+<p>This can be in the form of stickies or cards with different colors to signify either different classes of service or could be simply the different type of work items. (In SwiftKanban, the colors signify the different work item types!)If you think it may be useful, your Kanban board can have different Swim Lanes, one for each class of service or for each work item type. However, initially, to keep things simple, you could also just have a single swimlane to manage all your work – and do any board redesign later.</p>
+<ul>
+<li><strong>Limit WIP (Work in Progress):</strong> Limiting work-in-progress (WIP) is fundamental to implementing Kanban – a ‘Pull-system’. By limiting WIP, you encourage your team to complete work at hand first before taking up new work. Thus, work currently in progress must be completed and marked done. This creates capacity in the system, so new work can be pulled in by the team. Initially, it may not be easy to decide what your WIP limits should be. In fact, you may start with no WIP limits. The great Don Reinertsen suggests (he did so at one of the Lean Kanban conferences) that you can start with no WIP limits and simply observe the initial work in progress as your team starts to use Kanban. Once you have sufficient data, define WIP limits for each stage of the workflow (each column of your Kanban board) as being equal to half the average WIP.</li>
+</ul>
+<p>Typically, many teams start with a WIP Limit of 1 to 1.5 times the number of people working in a specific stage. Limiting WIP and putting the WIP limits on each column of the board not only helps the team members first finish what they are doing before taking up new stuff – but also communicates to the customer and other stakeholders that there is limited capacity to do work for any team – and they need to plan carefully what work they ask the team to do.</p>
+<p><span><span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=%E2%80%9CAn%20interesting%20side%20effect%20of%20pull%20systems%20is%20that%20they%20limit%20work-in-progress%20%28WIP%29%20to%20some%20agreed-upon%20quantity%E2%80%9D%20%E2%80%93%20David%20J.%20Anderson&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">“An interesting side effect of pull systems is that they limit work-in-progress (WIP) to some agreed-upon quantity” – David J. Anderson </a></span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=%E2%80%9CAn%20interesting%20side%20effect%20of%20pull%20systems%20is%20that%20they%20limit%20work-in-progress%20%28WIP%29%20to%20some%20agreed-upon%20quantity%E2%80%9D%20%E2%80%93%20David%20J.%20Anderson&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">Click To Tweet</a></span></p><ul>
+<li><strong>Manage Flow:</strong> Managing and improving flow is the crux of your Kanban system after you have implemented the first 2 practices. A Kanban system helps you manage flow by highlighting the various stages of the workflow and the status of work in each stage. Depending on how well the workflow is defined and WIP Limits are set, you will observe either a smooth flow within WIP limits or work piling up as something gets held up and starts to hold up capacity. All of this affects how quickly work traverses from start to the end of the workflow (some people call it value stream). Kanban helps your team analyze the system and make adjustments to improve flow so as to reduce the time it takes to complete each piece of work.</li>
+</ul>
+<p>A key aspect of this process of observing your work and resolving/ eliminating bottlenecks is to look at the intermediate wait stages (the intermediate Done stages) and see how long work items stay in these “handoff stages”. As you will learn, reducing the time spent in these wait stages is key to reducing Cycle Time. As you improve flow, your team’s delivery of work becomes smoother and more predictable. As it becomes more predictable, it becomes easier for you to make reliable commitments to your customer about when you will get done with any work you are doing for them. Improving your ability to forecast completion times reliably is a big part of implementing a Kanban system!</p>
+<ul>
+<li><strong>Make Process Policies Explicit:</strong> As part of visualizing your process, it makes sense to also define and visualize explicitly, your policies (process rules or guidelines) for how you do the work you do. By formulating explicit process guidelines, you create a common basis for all participants to understand how to do any type of work in the system. The policies can be at the board level, at a swim lane level and for each column.They can be a checklist of steps to be done for each work item-type, entry-exit criteria for each column, or anything at all that helps team members manage the flow of work on the board well. Examples of explicit policies include the definition of when a task is completed, the description of individual lanes or columns, who pulls when, etc. The policies must be defined explicitly and visualized usually on the top of the board and on each lane and column.</li>
+</ul>
+<p><img title="Explicit Policies in Kanban Board" src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Explicit-Policies-in-Kanban-Board-1024x613.png" alt="Explicit Policies in Kanban Board" width="797" height="501" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Explicit-Policies-in-Kanban-Board-1024x613.png" data-was-processed="true"></p>
+<ul>
+<li><strong>Implement Feedback Loops:</strong> Feedback loops are an integral part of any good system. The Kanban Method encourages and helps you implement feedback loops of various kinds – review stages in your Kanban board workflow, metrics and reports and a range of visual cues that provide you continuous feedback on work progress – or the lack of it – in your system.While the mantra of “Fail fast! Fail often!” may not be intuitively understood by many teams, the idea of getting feedback early, especially if you are on the wrong track with your work, is crucial to ultimately delivering the right work, the right product or service to the customer in the shortest possible time. Feedback loops are critical for ensuring that.</li>
+</ul>
+<p><img title="CFD - Cycle Time Distribution Throughput" src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/CFD-Cycle-Time-Distribution-Throughput.png" alt="CFD - Cycle Time Distribution Throughput" width="756" height="557" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/CFD-Cycle-Time-Distribution-Throughput.png" data-was-processed="true"></p>
+<ul>
+<li><strong>Improve Collaboratively, Evolve Experimentally (using the scientific method):</strong> The Kanban Method is an evolutionary improvement process. It helps you adopt small changes and improve gradually at a pace and size that your team can handle easily. It encourages the use of the scientific method – you form a hypothesis, you test it and you make changes depending on the outcome of your test. As a team implementing Lean/ Agile principles, your key task is to evaluate your process constantly and improve continuously as needed and as possible.</li>
+</ul>
+<p>The impact of each change that you make can be observed and measured using the various signals your Kanban system provides you. Using these signals, you can evaluate whether a change is helping you improve or not, and decide whether to keep it or try something else. Kanban systems help you collect a lot of your system’s performance data – either manually, if you use a physical board, or automatically, if you use a tool such as <a target="_blank" href="https://www.digite.com/swiftkanban/swiftkanban-free-trial/" rel="noopener">SwiftKanban</a>. Using this data, and the metrics it helps you generate, you can easily evaluate whether your performance is improving or dropping – and tweak your system as needed.</p>
+<p><a target="_blank" href="https://www.digite.com/swiftkanban/swiftkanban-free-trial/" rel="noopener"><img src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-board.jpg" alt="try kanban board" width="728" height="90" data-lazy-srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-board.jpg 728w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-board-300x37.jpg 300w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-board-640x79.jpg 640w" data-lazy-sizes="(max-width: 728px) 100vw, 728px" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-board.jpg" sizes="(max-width: 728px) 100vw, 728px" srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-board.jpg 728w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-board-300x37.jpg 300w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2019/11/try-kanban-board-640x79.jpg 640w" data-was-processed="true"></a></p>
+<h5 id="kanban-concept"></h5>
+<p>Kanban is a non-disruptive evolutionary change management system. This means that the existing process is improved in small steps. By implementing many minor changes (rather than a large one), the risk to the overall system is reduced. The evolutionary approach of Kanban leads to low or no resistance in the team and the stakeholders involved.</p>
+<p>The first step in the introduction of Kanban is to visualize the workflow. This is done in the form of a&nbsp;<a href="https://www.digite.com/kanban/kanban-board/"></a>Kanban board consisting of a simple whiteboard and sticky notes or cards. Each card on the board represents a task.</p>
+<p><img title="Kanban Board - Todo - Doing - Done" src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Kanban-Board-Todo-Doing-Done.png" alt="Kanban Board - Todo - Doing - Done" width="788" height="508" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Kanban-Board-Todo-Doing-Done.png" data-was-processed="true"></p>
+<p>In a classic Kanban board model, there are three columns, as shown in the picture above:</p>
+<ul>
+<li>&nbsp;This column lists the tasks that are not yet started. (aka “backlog”)</li>
+<li>&nbsp;Consists of the tasks that are in progress.</li>
+<li>&nbsp;Consists of the tasks that are completed.</li>
+</ul>
+<p>This simple visualization alone leads to a great deal of transparency about the distribution of the work as well as existing bottlenecks if any. Of course, Kanban boards can show elaborate workflows depending on the complexity of the workflow and the need to visualize and examine specific parts of the workflow to identify bottlenecks in order to remove them.</p>
+<h5>The concept of FLOW</h5>
+<p>At the core of Kanban is the concept of “Flow”. This means that the cards should flow through the system as evenly as possible, without long waiting times or blockages. Everything that hinders the flow should be critically examined. Kanban has different techniques, metrics and models, and if these are consistently applied, it can lead to a culture of continuous improvement (kaizen).</p>
+<p><img title="The Concept of flow - Kanban" src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban-.png" alt="The Concept of flow - Kanban" width="780" height="479" data-lazy-srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban-.png 1092w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban--300x184.png 300w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban--768x471.png 768w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban--1024x628.png 1024w" data-lazy-sizes="(max-width: 780px) 100vw, 780px" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban-.png" sizes="(max-width: 780px) 100vw, 780px" srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban-.png 1092w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban--300x184.png 300w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban--768x471.png 768w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/The-Concept-of-flow-Kanban--1024x628.png 1024w" data-was-processed="true"></p>
+<p>The concept of Flow is critical and by measuring Flow metrics and working to improve them, you can dramatically improve the speed of your delivery processes while reducing cycle time and improving the quality of your products or services by getting faster feedback from your customers – internal or external.</p>
+<p>These are dealt with in great detail in the book titled “<a target="_blank" href="https://www.actionableagile.com/publications/" rel="noopener">Actionable Agile</a>” by Dan Vacanti.</p>
+<h5 id="wip-limits"></h5>
+<p><img title="WIP Limits" src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1.jpg" alt="wip-limits" width="132" height="132" data-lazy-srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1.jpg 726w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1-150x150.jpg 150w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1-300x300.jpg 300w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1-500x500.jpg 500w" data-lazy-sizes="(max-width: 132px) 100vw, 132px" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1.jpg" sizes="(max-width: 132px) 100vw, 132px" srcset="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1.jpg 726w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1-150x150.jpg 150w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1-300x300.jpg 300w, https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/10/wip-limits1-500x500.jpg 500w" data-was-processed="true"></p>
+<p>A key aspect of Kanban is to reduce the amount of multi-tasking that most teams and knowledge workers are prone to do and instead encourage them to “Stop Starting! And Start Finishing!”, a mantra coined by Dr. Arne Roock (of www.Software-Kanban.de). WIP – Work-in-Progress – Limits defined at each stage of the workflow on a Kanban board encourage team members to finish work at hand and only then, take up the next piece of work.</p>
+<p><img title="WIP Limits in Kanban Board" src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/WIP-Limits-in-Kanban-Board.png" alt="WIP Limits in Kanban Board" width="771" height="517" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/WIP-Limits-in-Kanban-Board.png" data-was-processed="true"></p>
+<p><span><span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=Do%20not%20force%20visualization%2C%20transparency%2C%20and%20WIP%20limits%20on%20any%20department%20that%20does%20not%20volunteer%20to%20collaborate.%E2%80%9D%20%E2%80%93%20David%20J.%20Anderson&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">Do not force visualization, transparency, and WIP limits on any department that does not volunteer to collaborate.” – David J. Anderson </a></span><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.digite.com%2Fkanban%2Fwhat-is-kanban%2F&amp;text=Do%20not%20force%20visualization%2C%20transparency%2C%20and%20WIP%20limits%20on%20any%20department%20that%20does%20not%20volunteer%20to%20collaborate.%E2%80%9D%20%E2%80%93%20David%20J.%20Anderson&amp;via=digiteinc&amp;related=digiteinc" target="_blank" rel="noopener noreferrer">Click To Tweet</a></span></p><h5></h5>
+<p>The beauty of Kanban is in its simplicity. However, Kanban is not just about visualizing a process on a white board (or an electronic board) and working with stickies or electronic cards. As you can see from above, it is much more than that. You will truly benefit from its implementation if you apply all the principles and practices in a methodological manner.</p>
+<p>The current trends from around the world show that Kanban is gaining in popularity and is being used in many different areas, from small agencies and start-ups to traditional organizations of all sizes.</p>
+<h5 id="kanban-in-it">Kanban in IT &amp; Software</h5>
+<p>Kanban is not a software development or a <a target="_blank" href="https://www.digite.com/blog/ai-in-project-management/" rel="noopener">project management</a> methodology – David makes that very clear in his ‘Blue Book’. Kanban does not say anything about how a Software should be developed. It does not even say anything about how Software projects should be planned and implemented. Therefore, Kanban is not a management framework such as Scrum. Instead, the purpose of Kanban is to continually improve one’s own work process.</p>
+<p>Kanban was used in Microsoft’s software development operations in 2004. Since then, Kanban has been adopted enthusiastically in the IT, Ops, DevOps and applications/ software teams.</p>
+<p>The beauty of Kanban is that it can be applied to any process or methodology. Whether you are already using Agile methods such as Scrum, XP and others, or more traditional methods – waterfall, iterative, etc. – you can apply Kanban on top of that to gradually start improving your processes, reduce cycle time and improve your flow. In the process, you will find yourself on the path to continuous delivery of features, products or services.</p>
+<h5 id="kanban-in-lean-agile">Kanban in Lean/ Agile software/ product development</h5>
+<p>Application software and tech product development teams have adopted Kanban as a way to implement Lean and Agile principles. The Kanban Method provides technology teams a great set of principles for visualizing their work, delivering products and services continuously and getting customer feedback more often and with greater speed. Consequently, it is helping teams get to market faster with greater fidelity to what the customers want from those products and services.</p>
+<p><img title="Kanban for Lean Agile Teams" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20778%20510'%3E%3C/svg%3E" alt="Kanban for Lean Agile Teams" width="778" height="510" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Kanban-for-Lean-Agile-Teams.png"></p>
+<p>The definition of Kanban in the IT sector has undergone its own evolution over the last 3 – 5 years. Today, Kanban is considered to be a method that brings about agility in managing and improving service delivery in a gradual, evolutionary manner.</p>
+<p>In addition, the Kanban Method provides important principles and techniques for better managing Service Level Agreement (SLA) commitments, delivering products to market just in time and minimizing risk and cost of delay. Using concepts such Class of Services, deferred commitment and 2-phase commit, Kanban helps customers and delivery teams collaborate effectively and helps ensure that the right things are getting worked on at the right time.</p>
+<p>The advent of Upstream Kanban, Portfolio Kanban and Enterprise Services Planning in recent years has provided businesses even greater reason to implement Kanban for achieving enterprise agility and improved market performance.</p>
+<h5>Kanban as an Alternative Path to Enterprise Agility</h5>
+<p>The Kanban Method helps you gradually improve the delivery of your products and services. It does so by helping you eliminate bottlenecks in your system, improve flow and reduce cycle time. It helps you deliver more continuously and get faster feedback to make any changes that may be needed by your customer. It helps you become more responsive.</p>
+<p>Overall, Kanban enables all of the principles of the Agile Manifesto and helps you deliver products and services that your market actually needs. Whether you are currently using Scrum and other Agile techniques or methodologies, Kanban helps you improve your processes for greater performance of your teams and organizations.</p>
+<h5 id="kanban-non-it">Kanban beyond Software &amp; IT</h5>
+<p>Given its roots in manufacturing, Kanban is a natural fit in non-IT business processes as well, with tremendous benefits to organizations wanting to become lean and agile and deliver high-quality products and services in a responsive manner.</p>
+<p><img title="Kanban Board for HR Recruitment" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20776%20479'%3E%3C/svg%3E" alt="Kanban Board for HR Recruitment" width="776" height="479" data-lazy-src="https://d30s2hykpf82zu.cloudfront.net/wp-content/uploads/2018/11/Kanban-Board-for-Recruitment.png"></p>
+<p>While medium and large product and services organizations, especially hi-tech manufacturing companies, have been implementing Lean/ 6-Sigma initiatives for several years, Kanban enables all types of companies and business functions such as HR, Marketing, Sales, Procurement and so forth.</p>
+<p>Kanban is also being applied in traditional project management contexts such as construction and engineering projects. such as constructions and engineering projects. A wide variety of organizations, staffing companies, recruitment organizations, advertising agencies, insurance companies and many others are looking to Kanban for streamlining their operations, eliminating waste and dramatically improving throughput and quality.</p>
+
+<ul>
+<li><a href="https://www.digite.com/kanban/getting-started-with-kanban/">How do I get started?</a></li>
+<li><a href="https://www.digite.com/kanban/scrumban/">What is Scrumban?</a></li>
+<li><a href="https://www.digite.com/kanban/kanban-board/">What is a Kanban Board?</a></li>
+<li><a href="https://www.digite.com/kanban/kanban-for-project-management/">How can I manage my project/ function using Kanban?</a></li>
+</ul>
+<p>You can also sign up for upcoming&nbsp;<a href="https://www.digite.com/webinars/">webinars on Kanban</a>&nbsp;– or look at some great previous webinars conducted by thought-leaders such as David Anderson and several other thought leaders!</p>
+<p>If you want to explore SwiftKanban, you can check out our&nbsp;<a href="https://www.digite.com/swiftkanban/features/">rich set of features</a>&nbsp;or if you’re looking for a&nbsp;<a href="https://www.digite.com/swiftkanban/">free Kanban board</a>&nbsp;signup for SwiftKanban&nbsp;<a href="https://www.digite.com/swiftkanban/swiftkanban-free-trial/">Here</a>! If you have any immediate questions, ask one of our Sales reps at&nbsp;<a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=sales@digite.com" target="_blank">sales@digite.com</a></p>
+</div>
+                        </div>                          
+                        </div>
+                        </div>
+                    </div></div>
+  <span></span> <!-- for IntersectionObserver -->
+  
+  
+  
+
+
+</body><style>body {
+      font-size:  13px;
+      font-family: Helvetica, Arial, sans-serif;
+      width: 600px;
+    }
+    .page {
+      line-height: unset;
+    }
+    h1, h2, h3 {
+      line-height: initial;
+    }</style></html>

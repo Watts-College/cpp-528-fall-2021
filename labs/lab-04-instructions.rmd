@@ -1,0 +1,112 @@
+---
+title: 'Lab 04 - Predicting MHV Change'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output:
+  rmdformats::downcute:
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: false
+    highlight: tango
+    df_print: paged
+    includes:
+      after_body: 'footer.html'
+---
+
+<br>
+
+
+---
+
+<br>
+
+This lab is designed to help you build your baseline model of neighborhood change before adding the policy variables in the next lab. 
+
+
+
+
+# Part 1 - Data
+
+Similar to your previous lab, create a dataset that includes 2000 and 2010 census variables drop all rural census tracts. 
+
+Create a variable that measures the growth of median home value from 2000 to 2010. 
+
+Omit cases that have a median home value less than $10,000 in 2000. 
+
+Omit cases with growth rates above 200%. 
+
+# Part 2 - Predict MHV Change 
+
+Select at least three census variables that you feel will be good predictors of change in MHV between 2000 and 2010. 
+
+Run the model while including metro-level fixed effects (**cbsa** name or FIPS). Make sure you check for variable skew and multicollinearity and adjust accordingly. 
+
+What are the results? Which factor was most important? Did it meet your expectations? Were there any variables that were not significant that you expected to be? 
+
+Explain your findings to a general audience. 
+
+
+
+
+
+
+
+-----
+
+
+<br>
+
+# Submission Instructions
+
+* your separate `.R` file that stores your data processing steps
+    + You do not have to call it `utilities.R` anymore, feel free to call it whatever you like.
+* your knitted RMD file that answers the questions posed above.
+     + If your RMD file looks exactly like the [tutorial](lab-04-tutorial.html), you will not get full credit.
+     + This is because the tutorial is meant to show you what the data preprocessing steps should look like; not where they should live (which is in a separate `.R` file).
+     + This tutorial also has **extra material meant to teach you concepts**. The non technical audience does not need to see this information so exclude it from your work when you submit your lab.
+     + **You need to use `import::here()` function and import specific objects** rather than doing all of your data processing within the `.rmd` file. If you need a tutorial on how to use this, please see the ["Project Data Steps" tutorial](PROJECT-DATA-STEPS.html).
+* your HTML output of your RMD file
+
+Record your work in an RMD file where you can document your code and responses to the questions. Knit your RMD file and include your rendered HTML file. 
+
+Note that this lab will become one chapter in your final report. You will save time by drafting the lab as if it is an external report chapter rather than a regular lab. 
+
+Login to Canvas at <http://canvas.asu.edu> and navigate to the assignments tab in the course repository. Upload your zipped folder to the appropriate lab submission link.
+
+Remember to:
+
+* name your files according to the convention: **Lab-##-LastName.Rmd**
+* show your solution, include your code.
+* do not print excessive output (like a full data set).
+* follow appropriate style guidelines (spaces between arguments, etc.).
+
+See [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml) for examples.
+
+
+---
+
+<br>
+
+## Notes on Knitting
+
+If you are having problems with your RMD file, visit the [**RMD File Styles and Knitting Tips**](https://ds4ps.org/cpp-526-spr-2020/labs/r-markdown-files.html) manual.
+
+Note that when you knit a file, it starts from a blank slate. You might have packages loaded or datasets active on your local machine, so you can run code chunks fine. But when you knit you might get errors that functions cannot be located or datasets don't exist. Be sure that you have included chunks to load these in your RMD file.
+
+Your RMD file will not knit if you have errors in your code. If you get stuck on a question, just add `eval=F` to the code chunk and it will be ignored when you knit your file. That way I can give you credit for attempting the question and provide guidance on fixing the problem.
+
+
+<br>
+<hr>
+<br>
+
+<style>
+blockquote {
+    padding: 11px 22px;
+    margin: 0 0 22px;
+    font-size: 18px;
+    border-left: 5px solid lightgray;
+}
+
+</style>
+
