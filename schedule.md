@@ -5,6 +5,7 @@ title: Schedule
 canvas: 
   assignment_url: 'https://canvas.asu.edu/courses/101007/assignments'
   reflection_url: 'https://asu.instructure.com/courses/101007/assignments'
+  calendar_url: 'https://asu.instructure.com/courses/101007/assignments/syllabus'
 
 reflection: 
   post-01: 'Saturday, October 16'
@@ -81,7 +82,8 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <a class="uk-button uk-button-default" style="width:200px" href="../motivation/">MOTIVATION</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../sched/week-00/">COURSE OVERVIEW</a>
-
+<br><br>
+<a class="uk-button uk-button-default" style="width:200px" href="{{ page.canvas.calendar_url }}">COURSE CALENDAR</a>
 ---
 
 
@@ -119,7 +121,13 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 
 **Lab Due {{page.labs.lab-01}}**
 
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.canvas.assignment_url}}">SUBMIT LAB</a>
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.canvas.assignment_url}}">SUBMIT REFLECTION</a>
+
+---
+
+**Team Charter Due {{page.group.del-01}}**
+
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.group.sub-01}}">SUBMIT CHARTER</a>
 
 ---
 
@@ -139,15 +147,15 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../sched/week-02/">LECTURE</a>
 <br><br>
-<a class="uk-button uk-button-default" style="width:200px" href="../discuss/yellowdig-02">YELLOWDIG TOPIC</a>
+<a class="uk-button uk-button-default" style="width:200px" href="{{ page.reflection.ref-02 }}">REFLECTION TOPIC</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-02/">LAB</a>
 
 ---
 
-**YD Post by {{page.yellowdig.post-02}}**
+**Reflection Submission by {{page.reflection.post-02}}**
 
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.yellowdig_url}}">CREATE POST</a>
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.reflection_url}}">SUBMIT</a>
 
 ---
 
@@ -172,7 +180,7 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../sched/week-03/">LECTURE</a>
 <br><br>
-<a class="uk-button uk-button-default" style="width:200px" href="../discuss/yellowdig-03">YELLOWDIG TOPIC</a>
+<a class="uk-button uk-button-default" style="width:200px" href="{{ page.reflection.ref-03 }}">REFLECTION TOPIC</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-03-tutorial.html">LAB TUTORIAL</a>
 <br><br>
@@ -180,9 +188,9 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 
 ---
 
-**YD Post by {{page.yellowdig.post-03}}**
+**Reflection Submission by {{page.reflection.post-03}}**
 
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.yellowdig_url}}">CREATE POST</a>
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.reflection_url}}">SUBMIT</a>
 
 ---
 
@@ -207,7 +215,7 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../sched/week-04/">LECTURE</a>
 <br><br>
-<a class="uk-button uk-button-default" style="width:200px" href="../discuss/yellowdig-04">YELLOWDIG TOPIC</a>
+<a class="uk-button uk-button-default" style="width:200px" href="{{ page.reflection.ref-04 }}">REFLECTION TOPIC</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-04-tutorial.html">LAB TUTORIAL</a>
 <br><br>
@@ -218,9 +226,9 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 
 ---
 
-**YD Post by {{page.yellowdig.post-04}}**
+**Reflection Submission by {{page.reflection.post-04}}**
 
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.yellowdig_url}}">CREATE POST</a>
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.reflection_url}}">SUBMIT</a>
 
 ---
 
@@ -245,17 +253,16 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../sched/week-05/">LECTURE</a>
 <br><br>
-<a class="uk-button uk-button-default" style="width:200px" href="../discuss/yellowdig-05">YELLOWDIG TOPIC</a>
-<br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-05-tutorial.html">LAB TUTORIAL</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-05-instructions.html">LAB</a>
 
 ---
 
-**YD Post by {{page.yellowdig.post-05}}**
+**No Reflection Due**
 
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.yellowdig_url}}">CREATE POST</a>
+  Consider reviewing <a href="{{ page.group.sub-01 }}">team charter</a> to ensure goals are on-track. 
+  You can also schedule a midpoint check-in with the instructor and/or teammates if needed.
 
 ---
 
@@ -280,15 +287,15 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../sched/week-06/">LECTURE</a>
 <br><br>
-<a class="uk-button uk-button-default" style="width:200px" href="../discuss/yellowdig-06">YELLOWDIG TOPIC</a>
+<a class="uk-button uk-button-default" style="width:200px" href="{{ page.reflection.ref-05 }}">REFLECTION TOPIC</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-06-instructions.html">LAB</a>
 
 ---
 
-**YD Post by {{page.yellowdig.post-06}}**
+**Reflection Submission by {{page.reflection.post-05}}**
 
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.yellowdig_url}}">CREATE POST</a>
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.reflection_url}}">SUBMIT</a>
 
 ---
 
@@ -311,15 +318,8 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 
 <a class="uk-button uk-button-default" style="width:200px" href="../sched/week-07/">LECTURE</a>
 <br><br>
-<a class="uk-button uk-button-default" style="width:200px" href="../discuss/yellowdig-07">YELLOWDIG TOPIC</a>
-<br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../project/project_rubric.html">GRADING RUBRIC</a>
 
----
-
-**YD Post by {{page.yellowdig.post-07}}**
-
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.yellowdig_url}}">CREATE POST</a>
 
 ---
 
