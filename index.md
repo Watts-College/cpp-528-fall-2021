@@ -17,7 +17,7 @@ info:
  course_start_end_dates: October 13 to December 3, 2021
  course_prerequisites:  
  class_meets_when:  Asynchronous  
- class_meets_where:  'https://asu.zoom.us/j/7422653906'
+ class_meets_where:  Zoom
  review_sessions_when: TBD 
  review_sessions_where: Zoom
  discussion_board_url: 'https://watts-college.github.io/cpp-528-fall-2021/help/'
@@ -33,7 +33,7 @@ instructor:
    scholar_url: 
    linked_in_url: 'www.linkedin.com/in/courtney-stowers'
    office_hours_time: By appointment (see appointment app)
-   office_hours_location:  'https://asu.zoom.us/j/7422653906'
+   office_hours_location:  Zoom
    office_hours_app_url: 'https://calendly.com/courtney-stowers/'
    
 
