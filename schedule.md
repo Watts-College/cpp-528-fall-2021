@@ -86,6 +86,7 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <a class="uk-button uk-button-default" style="width:200px" href="../sched/week-00/">COURSE OVERVIEW</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="{{ page.canvas.calendar_url }}">COURSE CALENDAR</a>
+  
 ---
 
 
