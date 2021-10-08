@@ -4,26 +4,32 @@ title: Schedule
 
 canvas: 
   assignment_url: 'https://canvas.asu.edu/courses/101007/assignments'
-  
-yellowdig_url: 'https://canvas.asu.edu/courses/101007/assignments/2613245'
+  reflection_url: 'https://asu.instructure.com/courses/101007/assignments'
 
-yellowdig: 
-  post-01: 'Sunday, October 17'
-  post-02: 'Sunday, October 24'
-  post-03: 'Sunday, October 31'
-  post-04: 'Sunday, November 7' 
-  post-05: 'Sunday, November 14' 
-  post-06: 'Sunday, November 21' 
-  post-07: 'Sunday, November 28' 
+reflection: 
+  post-01: 'Saturday, October 16'
+  post-02: 'Saturday, October 23'
+  post-03: 'Saturday, October 30'
+  post-04: 'Saturday, November 6' 
+  post-05: 'Saturday, November 20'
+  ref-01: ''
+  ref-02: ''
+  ref-03: ''
+  ref-04: ''
+  ref-05: '' 
   
 
 labs:
-  lab-01:  'Tuesday, October 19'
-  lab-02:  'Tuesday, October 26'
-  lab-03:  'Tuesday, November 2'
-  lab-04:  'Tuesday, November 9'
-  lab-05:  'Tuesday, November 16'
+  lab-01:  'Wednesday, October 20'
+  lab-02:  'Wednesday, October 27'
+  lab-03:  'Wednesday, November 3'
+  lab-04:  'Wednesday, November 10'
+  lab-05:  'Wednesday, November 17'
   lab-06:  'Tuesday, November 23'
+
+group:
+ del-01:   'Wednesday, October 20'
+ sub-01: 'https://asu.instructure.com/courses/101007/assignments/2658610'
   
 videos: 
   vid-01: 'https://www.youtube.com/embed/uQxRUoqnRtc'
@@ -97,15 +103,17 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../sched/week-01/">LECTURE</a>
 <br><br>
-<a class="uk-button uk-button-default" style="width:200px" href="../discuss/yellowdig-01">YELLOWDIG TOPIC</a>
+<a class="uk-button uk-button-default" style="width:200px" href="{{ page.reflection.ref-01 }}">REFLECTION TOPIC</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-01-instructions/">LAB</a>
+<br><br>
+<a class="uk-button uk-button-default" style="width:200px" href="{{ page.group.sub-01 }}">TEAM CHARTER</a>
 
 ---
 
-**YD Post by {{page.yellowdig.post-01}}**
+**Reflection Submission by {{page.reflection.post-01}}**
 
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.yellowdig_url}}">CREATE POST</a>
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.reflection_url}}">SUBMIT</a>
 
 ---
 
