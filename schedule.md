@@ -31,6 +31,7 @@ labs:
   lab-06:  'Tuesday, November 23'
 
 group:
+ git-01:   'Thursday, October 14'
  del-01:   'Wednesday, October 20'
  sub-01: 'https://asu.instructure.com/courses/101007/assignments/2658610'
   
@@ -113,6 +114,13 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-01-instructions/">LAB</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="{{ page.group.sub-01 }}">TEAM CHARTER</a>
+  
+---
+
+**Github Profile URL Submission by {{page.group.git-01}}**
+
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.canvas.assignment_url}}">SUBMIT URL</a>
+
 
 ---
 
