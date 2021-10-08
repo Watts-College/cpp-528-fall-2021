@@ -13,7 +13,6 @@ reflection:
   post-03: 'Saturday, October 30'
   post-04: 'Saturday, November 6' 
   post-05: 'Saturday, November 20'
-  post-06: 'Wednesday, December 1'
   ref-01: ''
   ref-02: ''
   ref-03: ''
@@ -304,13 +303,14 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 
 ---
 
-**Reflection Submission by {{page.reflection.post-05}}**
+**Optional Extra-Credit Reflection Due {{page.reflection.post-05}}**
 
 <a class="uk-button uk-button-primary" style="width:200px" href="{{page.reflection_url}}">SUBMIT REFLECTION</a>
 
 ---
 
 **Lab Due {{page.labs.lab-06}}**
+  Note that this is a Tuesday due to the Thanksgiving Holiday.
 
 <a class="uk-button uk-button-primary" style="width:200px" href="{{page.canvas.assignment_url}}">SUBMIT LAB</a>
 
@@ -333,12 +333,12 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="{{ page.reflection.ref-01 }}">OPTIONAL REFLECTION</a>
   
----
+ ---
 
-**Optional Extra-Credit Reflection Due {{page.reflection.post-06}}**
+**Team Peer-Review Evaluation Due {{page.projects.website}}**
 
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.reflection_url}}">SUBMIT REFLECTION</a>
-
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.canvas.assignment_url}}">SUBMIT PEER-REVIEW</a>
+  
 ---
 
 **Final Project Due {{page.projects.website}}**
