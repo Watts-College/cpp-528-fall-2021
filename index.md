@@ -14,27 +14,27 @@ info:
  course_number: CPP 528 
  course_level: Graduate 
  course_website: 'https://canvas.asu.edu/courses/101007'
- course_start_end_dates: March 8 to April 23, 2021
+ course_start_end_dates: October 13 to December 3, 2021
  course_prerequisites:  
  class_meets_when:  Asynchronous  
- class_meets_where:  'https://asu.zoom.us/meeting/557182841'
+ class_meets_where:  'https://asu.zoom.us/j/7422653906'
  review_sessions_when: TBD 
  review_sessions_where: Zoom
  discussion_board_url: 'https://watts-college.github.io/cpp-528-fall-2021/help/'
 
 instructor:
--  name: Cristian E. Nuno
-   title: Manager of Data Engineering and Information Systems / Faculty Associate
-   email: cenuno@asu.edu   
+-  name: Courtney Stowers, M.S.
+   title: Data Analyst / Faculty Associate
+   email: Courtney.Stowers@asu.edu  
    office_location: virtual
    website_url: 
-   github_url: 'https://github.com/cenuno' 
-   twitter_url: 'https://twitter.com/cenuno_'
+   github_url: 'https://github.com/castower' 
+   twitter_url:
    scholar_url: 
-   linked_in_url: 'https://www.linkedin.com/in/cristiannuno/'
+   linked_in_url: 'www.linkedin.com/in/courtney-stowers'
    office_hours_time: By appointment (see appointment app)
-   office_hours_location:  'https://asu.zoom.us/meeting/557182841'
-   office_hours_app_url: 'https://calendar.google.com/calendar/u/0/selfsched?sstoken=UUhwWDQ3dVdHQmp1fGRlZmF1bHR8OGM4MmYwNzBmMmMwYTRmY2UyODI2MzliNGNiNzFkODg'
+   office_hours_location:  'https://asu.zoom.us/j/7422653906'
+   office_hours_app_url: 'https://calendly.com/courtney-stowers/'
    
 
 textbooks:
