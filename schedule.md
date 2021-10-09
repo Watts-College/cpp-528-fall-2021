@@ -13,12 +13,11 @@ reflection:
   post-03: 'Saturday, October 30'
   post-04: 'Saturday, November 6' 
   post-05: 'Saturday, November 20'
-  ref-01: ''
-  ref-02: ''
-  ref-03: ''
-  ref-04: ''
-  ref-05: '' 
-  ref-06: ''
+  ref-01: 'https://asu.instructure.com/courses/101007/assignments/2658816'
+  ref-02: 'https://asu.instructure.com/courses/101007/assignments/2658908'
+  ref-03: 'https://asu.instructure.com/courses/101007/assignments/2658910'
+  ref-04: 'https://asu.instructure.com/courses/101007/assignments/2658911'
+  ref-05: 'https://asu.instructure.com/courses/101007/assignments/2658914' 
   
 
 labs:
