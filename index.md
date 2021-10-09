@@ -154,14 +154,9 @@ The assigned work for the term comes in the form of four elements, described bel
 
 - **Applied Project Deliverables (65%):**  Your report on the impact of federal tax credit programs designed to stimulate community revitalization will serve as your primary deliverable for the semester. Each week you will be asked to complete new steps on your final project. You may submit them for feedback and guidance, and revise them before the final deadline. Your final grade will be based upon how clearly results are presented and how easy it is for a non-team member to replicate results from your study using your GitHub repository. 
 
-- **Yellowdig Discussions (10%):**  YellowDig will be used this term to guide discussions on the substantive policy issues regarding community revitalization efforts, and on challenges of using administrative data to conduct causal analysis to measure program impact. 
+--**Team Peer-Review Evaluation:** The team peer review evaluation will give group members the opportunity to evaluate how well their team applied project management techniques and adhered to the roles and responsibilities outlined in the team charter. It also allows individuals to provide a peer-review of teammates.
 
-  - 5 points for a new pin.
-  - 3 points for a comment made to another pin.
-  - 2 point if you receive a comment on your pin.
-  - 1 point for liking another pin.
-  - 5 points if you earn an instructor badge for an informative post.
-  - max of 20 points can be earned each week.
+- **Team Charter and Reflections (10%):**  The Team Charter and Reflection Assignments will be used this term to provide you with the opportunity to explore topics and concepts related to project management and apply them to the final deliverable, as well as your personal and professional goals. Each of the Reflection assignments have a suggested word count, but like the labs, **they are graded pass / fail** by the instructor. The primary assessment will be whether the concepts are understood and appropriately applied. There is one extra-credit reflection assignment that can also be used to replace a missing reflection.
 
 <br>
 
