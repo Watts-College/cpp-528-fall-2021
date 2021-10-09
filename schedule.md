@@ -330,7 +330,7 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../project/project_rubric.html">GRADING RUBRIC</a>
 <br><br>
-<a class="uk-button uk-button-default" style="width:200px" href="{{ page.reflection.ref-01 }}">OPTIONAL REFLECTION</a>
+<a class="uk-button uk-button-default" style="width:200px" href="{{ page.canvas.assignment_url }}">PEER-REVIEW</a>
   
  ---
 
