@@ -156,6 +156,7 @@ The assigned work for the term comes in the form of four elements, described bel
 
     - **Team Peer-Review Evaluation:** The team peer review evaluation will give group members the opportunity to evaluate how well their team applied project management techniques and adhered to the roles and responsibilities outlined in the team charter. It also allows individuals to provide a peer-review of teammates.
 
+
 - **Personal Reflections and Team Charter (10%):**  The Personal Reflection and Team Charter Assignments will be used this term to provide you with the opportunity to explore topics and concepts related to project management and apply them to the final deliverable, as well as your personal and professional goals. Each of the four (4) Reflection assignments have a suggested word count, but like the labs, **they are graded pass / fail** by the instructor. The primary assessment will be whether the concepts are understood and appropriately applied. There is one (1) extra-credit reflection assignment that can also be used to replace a missing reflection.
 
 <br>
