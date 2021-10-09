@@ -9,11 +9,11 @@
 # COURSE INSTRUCTOR: 
 
 author:
-    name:       Cristian E. Nuno # update this
-    github:     cenuno   # Github username for avatar
+    name:       Courtney Stowers # update this
+    github:     castower   # Github username for avatar
 
 # calendly app for virtual office hours
-calendly:  ''
+calendly:  'https://calendly.com/courtney-stowers/'
 
 
 
@@ -42,8 +42,8 @@ header:
 #   url: https://ds4ps.org/dp4ss/#dp4ss-data-programming-for-the-social-sciences
 - title: Resources
   url: resources/
-- title: Yellowdig
-  url: https://canvas.asu.edu/courses/101007/assignments/2613245
+- #title: Yellowdig
+ # url: https://canvas.asu.edu/courses/101007/assignments/2613245
 - title: Canvas
   url: https://canvas.asu.edu/courses/101007
 - title: Get Help
