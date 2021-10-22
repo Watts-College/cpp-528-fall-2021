@@ -172,6 +172,7 @@ Tutorial:
  * [Git](https://git-scm.com/downloads)
  * [R Function Returns](https://www.datamentor.io/r-programming/return-function/)
  * [Grepl and regex packages](https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html)
+ * [Regular Expression in R](https://www.r-bloggers.com/2019/05/demystifying-regular-expressions-in-r/)
  * [Regex tutorial](https://github.com/Watts-College/cpp-528-fall-2021/blob/main/lectures/Regex-tutorial-Jonny-Fox-Factory-Mind-Medium.pdf)
  * [Regex Cheatsheet #1](https://github.com/Watts-College/cpp-528-fall-2021/blob/main/lectures/RegExCheatsheetInR.pdf)
  * [Regex Cheatsheet #2](https://github.com/Watts-College/cpp-528-fall-2021/blob/main/lectures/regular-expressions%20one-page-cheat-sheet.pdf)
