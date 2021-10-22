@@ -166,6 +166,7 @@ Tutorial:
  
  Tutorial:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mBlOTSlkBEM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Video Audio Transcript](https://docs.google.com/document/d/18tuWgNjdbvb0QmfPssjjDvxiUiwb4SRy/edit?usp=sharing&ouid=116435783742528000787&rtpof=true&sd=true)
  
  Resources mentioned in video:
  * [Github Desktop](https://desktop.github.com/)
