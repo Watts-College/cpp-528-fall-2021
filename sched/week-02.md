@@ -160,6 +160,22 @@ Lecture:
 Tutorial:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xZTVulTBIzM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ 
+ 
+ ##### Import Functions and Build Variable Filters
+ 
+ Tutorial:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mBlOTSlkBEM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ 
+ Resources mentioned in video:
+ * [Github Desktop](https://desktop.github.com/)
+ * [Git](https://git-scm.com/downloads)
+ * [R Function Returns](https://www.datamentor.io/r-programming/return-function/)
+ * [Grepl and regex packages](https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html)
+ * [Regex tutorial](https://github.com/Watts-College/cpp-528-fall-2021/blob/main/lectures/Regex-tutorial-Jonny-Fox-Factory-Mind-Medium.pdf)
+ * [Regex Cheatsheet #1](https://github.com/Watts-College/cpp-528-fall-2021/blob/main/lectures/RegExCheatsheetInR.pdf)
+ * [Regex Cheatsheet #2](https://github.com/Watts-College/cpp-528-fall-2021/blob/main/lectures/regular-expressions%20one-page-cheat-sheet.pdf)
+ 
 
 
 <br>
