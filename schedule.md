@@ -191,7 +191,9 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="{{ page.reflection.ref-03 }}">REFLECTION TOPIC</a>
 <br><br>
-<a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-03-tutorial.html">LAB TUTORIAL</a>
+<a class="uk-button uk-button-default" style="width:200px" href="../labs/PROJECT-DATA-STEPS.html">LAB TUTORIAL PART 1</a>
+<br><br>
+<a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-03-tutorial.html">LAB TUTORIAL PART 2</a>
 <br><br>
 <a class="uk-button uk-button-default" style="width:200px" href="../labs/lab-03-instructions.html">LAB</a>
 
