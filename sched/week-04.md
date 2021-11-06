@@ -32,11 +32,11 @@ The main insight is that home price is a variable that aggregates a tremendous a
 
 Since we are using the median home value variable which represents an entire census tract we focus on how neighborhood attributes and changes in attributes over time impact the average home price in the tract. 
 
-[Hedonic Pricing Models Overview](..articles/home-value-change/hedonic-pricing-method.pdf) 
+[Hedonic Pricing Models Overview](https://watts-college.github.io/cpp-528-fall-2021/articles/home-value-change/hedonic-pricing-method.pdf) 
 
 [Hedonic Pricing Regression Example in R](https://github.com/buruzaemon/hedonic)
 
-[Valuation Using Hedonic Pricing Models](..articles/home-value-change/valuation-using-hedonic-pricing.pdf)
+[Valuation Using Hedonic Pricing Models](https://watts-college.github.io/cpp-528-fall-2021/articles/home-value-change/valuation-using-hedonic-pricing.pdf)
 
 ## Lab Overview 
 
