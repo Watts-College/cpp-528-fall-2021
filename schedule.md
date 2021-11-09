@@ -37,7 +37,7 @@ videos:
   vid-01: 'https://www.youtube.com/embed/uQxRUoqnRtc'
   vid-02: 'https://www.youtube.com/embed/FQpA2-lzNus'
   vid-03: ''
-  vid-04: ''
+  vid-04: 'https://www.youtube.com/embed/uHAFts3ZyMU'
   vid-05: ''
   vid-06: ''
 
