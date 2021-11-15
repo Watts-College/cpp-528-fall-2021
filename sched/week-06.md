@@ -16,8 +16,11 @@ image-width: 150px
   
   The following tutorial will guide you through the Github Pages site creation process:
   
+  <div class="videoWrapper" style="--aspect-ratio: 3 / 4;">
 
 <iframe width="1120" height="630" src="https://www.youtube.com/embed/QdJZytqafFk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+  </div> 
 
 <hr>
 
