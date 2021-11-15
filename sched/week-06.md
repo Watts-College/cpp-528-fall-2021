@@ -7,15 +7,23 @@ image-width: 150px
 
 <div class = "uk-container uk-container-small">
 
-<br>
+<hr>
+  
+  <center>
+  
+  # Tutorial
+  
+  This week you will focus on compiling the labs that you and your teammates have completed into one concise reproducible website. To accomplish this, you will need to create a 
+  unified source.R file for your [lab submission](../labs/lab-06-instructions.html) and publish your Github Pages website for your team's repository.
+  
+  The following tutorial will guide you through the Github Pages site creation process:
+  
+
+<iframe width="1120" height="630" src="https://www.youtube.com/embed/QdJZytqafFk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 <hr>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QdJZytqafFk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<hr>
-<br>
-
-  Resources:
+  ## Resources:
   
   - [Github Pages Themes Repositories](https://github.com/pages-themes)
   - [Alternate Index.md file](https://drive.google.com/file/d/13lhEwoB9X_Sx3LLRjETHlz_p24s5j9Py/view?usp=sharing)
@@ -33,5 +41,5 @@ image-width: 150px
 <hr>
 <br>
 <br>
-
+  </center>
 </div>
