@@ -9,8 +9,6 @@ image-width: 150px
 
 <hr>
   
-  <center>
-  
   # Tutorial
   
   This week you will focus on compiling the labs that you and your teammates have completed into one concise reproducible website. To accomplish this, you will need to create a 
@@ -41,5 +39,4 @@ image-width: 150px
 <hr>
 <br>
 <br>
-  </center>
 </div>
