@@ -9,7 +9,7 @@ image-width: 150px
 
 <hr>
   
-  # Tutorial
+  <h1> Tutorial </h1>
   
   This week you will focus on compiling the labs that you and your teammates have completed into one concise reproducible website. To accomplish this, you will need to create a 
   unified source.R file for your [lab submission](../labs/lab-06-instructions.html) and publish your Github Pages website for your team's repository.
@@ -21,7 +21,7 @@ image-width: 150px
 
 <hr>
 
-  ## Resources:
+  <h2> Resources: </h2>
   
   - [Github Pages Themes Repositories](https://github.com/pages-themes)
   - [Alternate Index.md file](https://drive.google.com/file/d/13lhEwoB9X_Sx3LLRjETHlz_p24s5j9Py/view?usp=sharing)
