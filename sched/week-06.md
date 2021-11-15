@@ -5,6 +5,23 @@ image: model.svg
 image-width: 150px
 ---
 
+<style>
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+  
+  </style>
+
 <div class = "uk-container uk-container-small">
 
 <hr>
@@ -16,9 +33,9 @@ image-width: 150px
   
   The following tutorial will guide you through the Github Pages site creation process:
   
-  <div class="videoWrapper" style="--aspect-ratio: 3 / 4;">
+  <div class="videoWrapper">
 
-<iframe width="1120" height="630" src="https://www.youtube.com/embed/QdJZytqafFk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="840" height="630" src="https://www.youtube.com/embed/QdJZytqafFk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     
   </div> 
 
