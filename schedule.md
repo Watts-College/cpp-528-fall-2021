@@ -6,6 +6,7 @@ canvas:
   assignment_url: 'https://canvas.asu.edu/courses/101007/assignments'
   reflection_url: 'https://asu.instructure.com/courses/101007/assignments'
   calendar_url: 'https://asu.instructure.com/courses/101007/assignments/syllabus'
+  peerreview_url: 'https://canvas.asu.edu/courses/101007/assignments/2747022'
 
 reflection: 
   post-01: 'Saturday, October 16'
@@ -338,7 +339,7 @@ Submit Button - <a class="uk-button uk-button-primary" href="{{page.canvas.assig
 
 **Team Peer-Review Evaluation Due {{page.projects.website}}**
 
-<a class="uk-button uk-button-primary" style="width:200px" href="{{page.canvas.assignment_url}}">SUBMIT PEER-REVIEW</a>
+<a class="uk-button uk-button-primary" style="width:200px" href="{{page.canvas.peerreview_url}}">SUBMIT PEER-REVIEW</a>
   
 ---
 
